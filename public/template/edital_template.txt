@@ -1,0 +1,204 @@
+[TIMBRE]
+{{instituicao}}
+CNPJ: {{cnpj}}
+Endereço: {{endereco}}
+{{municipio}} - {{uf}}
+
+EDITAL DE {{modalidade_licitacao}} Nº {{numero_edital}}/{{ano}}
+(Em conformidade com a Lei 14.133/2021)
+
+Processo Administrativo nº: {{numero_processo}}
+
+[PREÂMBULO]
+{{instituicao}}, por meio do(a) {{setor_responsavel}}, torna público, para conhecimento dos interessados, que realizará licitação na modalidade {{modalidade_licitacao}}, do tipo {{tipo_licitacao}}, sob o regime de {{regime_execucao}}, objetivando a contratação de {{objeto_resumido}}, conforme condições, quantidades e exigências estabelecidas neste Edital e seus anexos, nos termos da Lei nº 14.133, de 1º de abril de 2021, e legislação e normas correlatas.
+
+DATA E HORA DA SESSÃO PÚBLICA: {{data_sessao}} - {{hora_sessao}}
+LOCAL DA SESSÃO PÚBLICA: {{local_sessao}}
+MEIO DE DISPUTA: {{meio_disputa}}
+MODO DE DISPUTA: {{modo_disputa}}
+CRITÉRIO DE JULGAMENTO: {{criterio_julgamento}}
+INTERVALO MÍNIMO DE DIFERENÇA DE VALORES: R$ {{intervalo_valores}}
+
+[1. DO OBJETO]
+1.1. O objeto da presente licitação é a escolha da proposta mais vantajosa para {{objeto_detalhado}}, conforme condições, quantidades e exigências estabelecidas neste Edital e seus anexos.
+
+1.2. Código CATMAT/CATSER: {{codigo_catmat_catser}}
+
+1.3. O critério de julgamento adotado será o de {{criterio_julgamento}}, observadas as exigências contidas neste Edital e seus Anexos quanto às especificações do objeto.
+
+1.4. O valor estimado da contratação é de R$ {{valor_estimado}}
+
+[2. DOS RECURSOS ORÇAMENTÁRIOS]
+2.1. As despesas para atender a esta licitação estão programadas em dotação orçamentária própria, prevista no orçamento para o exercício de {{ano_orcamento}}, na classificação abaixo:
+
+Gestão/Unidade: {{gestao_unidade}}
+Fonte de Recursos: {{fonte_recursos}}
+Programa de Trabalho: {{programa_trabalho}}
+Elemento de Despesa: {{elemento_despesa}}
+PI: {{plano_interno}}
+
+[3. DO CREDENCIAMENTO]
+3.1. O credenciamento é o nível básico de registro que permite a participação dos interessados na modalidade licitatória.
+
+3.2. O credenciamento dar-se-á pela atribuição de chave de identificação e de senha, pessoal e intransferível, para acesso ao sistema, no caso de licitação eletrônica.
+
+3.3. As regras para o credenciamento estarão disponíveis no sistema {{sistema_licitacao}} e serão as seguintes: {{regras_credenciamento}}
+
+[4. DA PARTICIPAÇÃO NO CERTAME]
+4.1. Poderão participar deste certame:
+{{condicoes_participacao}}
+
+4.2. Não poderão participar desta licitação os interessados:
+4.2.1. Suspensos ou impedidos de licitar ou contratar com a Administração;
+4.2.2. Declarados inidôneos para licitar ou contratar com a Administração Pública;
+4.2.3. Que estejam sob falência, em recuperação judicial ou extrajudicial, concurso de credores, concordata ou insolvência, em processo de dissolução ou liquidação;
+4.2.4. Que se enquadrem nas vedações previstas no art. 14 da Lei nº 14.133/2021;
+4.2.5. {{outras_restricoes_participacao}}
+
+4.3. A participação de consórcio é ({{permitido_consorcio}}). Justificativa: {{justificativa_consorcio}}
+
+[5. DA APRESENTAÇÃO DA PROPOSTA E DOS DOCUMENTOS DE HABILITAÇÃO]
+5.1. Os licitantes encaminharão os documentos de habilitação e a proposta, exclusivamente por meio do sistema, até a data e o horário estabelecidos para abertura da sessão pública.
+
+5.2. A proposta deverá ser elaborada em conformidade com os requisitos estabelecidos neste Edital e no Termo de Referência, com os seguintes requisitos:
+{{requisitos_proposta}}
+
+5.3. Todos os preços ofertados deverão ser apresentados em moeda corrente nacional, em algarismos com duas casas decimais após a vírgula.
+
+5.4. Os licitantes poderão deixar de apresentar os documentos de habilitação que constem do {{sistema_cadastro}}, assegurado aos demais licitantes o direito de acesso aos dados constantes dos sistemas.
+
+[6. DA ABERTURA DA SESSÃO, CLASSIFICAÇÃO DAS PROPOSTAS E FORMULAÇÃO DE LANCES]
+6.1. A abertura da presente licitação dar-se-á em sessão pública, por meio de sistema eletrônico, na data, horário e local indicados neste Edital.
+
+6.2. A sessão pública será conduzida por {{agente_conducao}}, que conduzirá a sessão na forma da lei.
+
+6.3. O modo de disputa adotado será o {{modo_disputa}}.
+
+6.4. Durante a sessão pública, a comunicação entre o {{agente_conducao}} e os licitantes ocorrerá exclusivamente mediante troca de mensagens, em campo próprio do sistema eletrônico.
+
+[7. DA ACEITABILIDADE DA PROPOSTA VENCEDORA]
+7.1. O critério de aceitabilidade será {{criterio_aceitabilidade}}.
+
+7.2. Será desclassificada a proposta que apresentar preço final superior ao preço máximo fixado, ou que apresentar preço manifestamente inexequível.
+
+7.3. Considera-se inexequível a proposta que: {{criterios_inexequibilidade}}
+
+7.4. O {{agente_conducao}} poderá convocar o licitante para enviar documento digital complementar, por meio de funcionalidade disponível no sistema, no prazo de {{prazo_envio_complementar}} horas, sob pena de não aceitação da proposta.
+
+[8. DA HABILITAÇÃO]
+8.1. Como condição prévia ao exame da documentação de habilitação, será verificado o eventual descumprimento das condições de participação, especialmente quanto à existência de sanção que impeça a participação no certame ou a futura contratação.
+
+8.2. Habilitação jurídica:
+{{requisitos_habilitacao_juridica}}
+
+8.3. Regularidade fiscal, social e trabalhista:
+{{requisitos_regularidade}}
+
+8.4. Qualificação econômico-financeira:
+{{requisitos_economico_financeira}}
+
+8.5. Qualificação técnica:
+{{requisitos_qualificacao_tecnica}}
+
+8.6. Documentos complementares:
+{{documentos_complementares}}
+
+[9. DOS RECURSOS]
+9.1. Declarado o vencedor e decorrida a fase de regularização fiscal e trabalhista da licitante qualificada como microempresa ou empresa de pequeno porte, se for o caso, será concedido o prazo de {{prazo_recursos}} para que qualquer licitante manifeste a intenção de recorrer, de forma motivada.
+
+9.2. Havendo quem se manifeste, caberá ao {{agente_conducao}} verificar a tempestividade e a existência de motivação da intenção de recorrer, para decidir se admite ou não o recurso, fundamentadamente.
+
+9.3. A falta de manifestação motivada do licitante quanto à intenção de recorrer importará a decadência desse direito.
+
+[10. DA ADJUDICAÇÃO E HOMOLOGAÇÃO]
+10.1. O objeto da licitação será adjudicado ao licitante declarado vencedor, por ato do {{agente_adjudicacao}}, caso não haja interposição de recurso, ou pela autoridade competente, após a regular decisão dos recursos apresentados.
+
+10.2. Após a fase recursal, constatada a regularidade dos atos praticados, a autoridade competente homologará o procedimento licitatório.
+
+[11. DA GARANTIA DE EXECUÇÃO]
+11.1. Será exigida a prestação de garantia na presente contratação: ({{exigencia_garantia}})
+
+11.2. Valor da garantia: {{valor_garantia}}
+
+11.3. Modalidades de garantia aceitas: {{modalidades_garantia}}
+
+11.4. Prazo para apresentação da garantia: {{prazo_garantia}}
+
+[12. DO TERMO DE CONTRATO OU INSTRUMENTO EQUIVALENTE]
+12.1. Após a homologação da licitação, em sendo realizada a contratação, será firmado Termo de Contrato ou emitido instrumento equivalente.
+
+12.2. O prazo de vigência da contratação é de {{prazo_vigencia}} meses, prorrogável conforme previsão no instrumento contratual.
+
+12.3. Previamente à contratação, a Administração realizará consulta para identificar possível suspensão temporária de participação em licitação e impedimentos de contratar.
+
+12.4. O Aceite do instrumento equivalente (Nota de Empenho/Carta Contrato/Autorização), emitido à empresa adjudicada, implica no reconhecimento de que:
+{{implicacoes_aceite}}
+
+[13. DO REAJUSTAMENTO EM SENTIDO GERAL]
+13.1. Os preços são fixos e irreajustáveis no prazo de {{prazo_reajuste}}.
+
+13.2. Após esse período, os preços contratuais serão reajustados, aplicando-se o índice {{indice_reajuste}} exclusivamente para as obrigações iniciadas e concluídas após a ocorrência da anualidade.
+
+[14. DA ACEITAÇÃO DO OBJETO E DA FISCALIZAÇÃO]
+14.1. Os critérios de recebimento e aceitação do objeto e de fiscalização estão previstos no Termo de Referência.
+
+14.2. A fiscalização da execução contratual será exercida por {{fiscalizacao}}.
+
+[15. DAS OBRIGAÇÕES DA CONTRATANTE E DA CONTRATADA]
+15.1. As obrigações da Contratante e da Contratada são aquelas previstas no Termo de Referência e minuta do contrato.
+
+[16. DO PAGAMENTO]
+16.1. As regras acerca do pagamento são as estabelecidas no Termo de Referência e na minuta do contrato.
+
+16.2. Prazo para pagamento: {{prazo_pagamento}}
+
+[17. DAS SANÇÕES ADMINISTRATIVAS]
+17.1. Comete infração administrativa, o licitante/adjudicatário que:
+{{infracoes_administrativas}}
+
+17.2. Pela inexecução total ou parcial do objeto deste contrato, a Administração pode aplicar à CONTRATADA as seguintes sanções:
+{{sancoes_aplicaveis}}
+
+17.3. Sistema de dosimetria:
+{{sistema_dosimetria}}
+
+[18. DA IMPUGNAÇÃO AO EDITAL E DO PEDIDO DE ESCLARECIMENTO]
+18.1. Até {{prazo_impugnacao}} dias úteis antes da data designada para a abertura da sessão pública, qualquer pessoa poderá impugnar este Edital.
+
+18.2. A impugnação poderá ser realizada por: {{formas_impugnacao}}
+
+18.3. Caberá ao {{responsavel_resposta_impugnacao}} decidir sobre a impugnação no prazo de até {{prazo_resposta_impugnacao}} dias úteis contados da data de recebimento da impugnação.
+
+18.4. Acolhida a impugnação, será definida e publicada nova data para a realização do certame.
+
+[19. DAS DISPOSIÇÕES GERAIS]
+19.1. A participação na presente licitação implica na aceitação plena e irrevogável de todos os termos, cláusulas e condições constantes deste Edital e de seus Anexos.
+
+19.2. Da sessão pública do certame será lavrada ata, que será assinada pelo {{agente_conducao}} e licitantes presentes.
+
+19.3. Não havendo expediente ou ocorrendo qualquer fato superveniente que impeça a realização do certame na data marcada, a sessão será automaticamente transferida para o primeiro dia útil subsequente, no mesmo horário anteriormente estabelecido, desde que não haja comunicação em contrário.
+
+19.4. As normas disciplinadoras da licitação serão sempre interpretadas em favor da ampliação da disputa entre os interessados, desde que não comprometam o interesse da Administração, o princípio da isonomia, a finalidade e a segurança da contratação.
+
+19.5. Os licitantes assumem todos os custos de preparação e apresentação de suas propostas.
+
+19.6. No julgamento das propostas e da habilitação, o {{agente_conducao}} poderá sanar erros ou falhas que não alterem a substância das propostas, dos documentos e sua validade jurídica.
+
+19.7. O desatendimento de exigências formais não essenciais não importará o afastamento do licitante, desde que seja possível o aproveitamento do ato, observados os princípios da isonomia e do interesse público.
+
+19.8. Em caso de divergência entre disposições deste Edital e de seus anexos ou demais peças que compõem o processo, prevalecerá as deste Edital.
+
+19.9. O Edital está disponibilizado na íntegra em {{local_disponibilizacao_edital}}.
+
+19.10. Integram este Edital, para todos os fins e efeitos, os seguintes anexos:
+{{lista_anexos}}
+
+[20. DO FORO]
+20.1. O foro para dirimir questões relativas ao presente Edital será o da {{foro_eleito}}.
+
+{{municipio}}, {{data_publicacao}}
+
+___________________________
+{{nome_autoridade}}
+{{cargo_autoridade}}
+Matrícula: {{matricula_autoridade}} 

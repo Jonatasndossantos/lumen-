@@ -1,0 +1,178 @@
+[TIMBRE]
+{{instituicao}}
+CNPJ: {{cnpj}}
+Endereço: {{endereco}}
+{{municipio}} - {{uf}}
+
+CONTRATO ADMINISTRATIVO Nº {{numero_contrato}}/{{ano}}
+(Em conformidade com a Lei 14.133/2021)
+
+Processo Administrativo nº: {{numero_processo}}
+
+CONTRATO QUE ENTRE SI CELEBRAM {{instituicao}} E A EMPRESA {{nome_contratada}} PARA {{objeto_resumido}}.
+
+A(O) {{instituicao}}, com sede na {{endereco}}, na cidade de {{municipio}}, inscrito(a) no CNPJ sob o nº {{cnpj}}, neste ato representado(a) pelo(a) {{cargo_representante_contratante}}, Sr.(a) {{nome_representante_contratante}}, nomeado(a) pela Portaria nº {{numero_portaria}}, de {{data_portaria}}, publicada no DOU de {{data_publicacao_portaria}}, portador(a) da matrícula funcional nº {{matricula_representante_contratante}}, doravante denominada CONTRATANTE, e a empresa {{nome_contratada}} inscrita no CNPJ/MF sob o nº {{cnpj_contratada}}, sediada na {{endereco_contratada}}, doravante designada CONTRATADA, neste ato representada pelo(a) Sr.(a) {{nome_representante_contratada}}, portador(a) da Carteira de Identidade nº {{rg_representante_contratada}}, expedida pela (o) {{orgao_emissor_rg}}, e CPF nº {{cpf_representante_contratada}}, tendo em vista o que consta no Processo nº {{numero_processo}} e em observância às disposições da Lei nº 14.133, de 1º de abril de 2021, e demais normas aplicáveis, resolvem celebrar o presente Termo de Contrato, decorrente do {{modalidade_licitacao}} nº {{numero_licitacao}}/{{ano_licitacao}}, mediante as cláusulas e condições a seguir enunciadas.
+
+CLÁUSULA PRIMEIRA – OBJETO
+1.1. O objeto do presente Termo de Contrato é {{objeto_detalhado}}, conforme especificações e quantitativos estabelecidos no Termo de Referência, anexo do Edital.
+
+1.2. Este Termo de Contrato vincula-se ao Edital do {{modalidade_licitacao}}, identificado no preâmbulo e à proposta vencedora, independentemente de transcrição.
+
+1.3. Discriminação do objeto:
+{{discriminacao_objeto}}
+
+CLÁUSULA SEGUNDA – VIGÊNCIA
+2.1. O prazo de vigência deste Termo de Contrato é de {{prazo_vigencia}} meses, com início na data de {{data_inicio_vigencia}} e encerramento em {{data_fim_vigencia}}, prorrogável na forma do art. 107 da Lei nº 14.133/2021.
+
+2.2. A prorrogação de contrato deverá ser promovida mediante celebração de termo aditivo.
+
+CLÁUSULA TERCEIRA – PREÇO
+3.1. O valor do presente Termo de Contrato é de R$ {{valor_contrato}} ({{valor_contrato_extenso}}).
+
+3.2. No valor acima estão incluídas todas as despesas ordinárias diretas e indiretas decorrentes da execução contratual, inclusive tributos e/ou impostos, encargos sociais, trabalhistas, previdenciários, fiscais e comerciais incidentes, taxa de administração, frete, seguro e outros necessários ao cumprimento integral do objeto da contratação.
+
+3.3. O valor acima é meramente estimativo, de forma que os pagamentos devidos à CONTRATADA dependerão dos quantitativos de serviços efetivamente prestados/fornecimento efetivamente realizado. (QUANDO FOR O CASO)
+
+CLÁUSULA QUARTA – DOTAÇÃO ORÇAMENTÁRIA
+4.1. As despesas decorrentes desta contratação estão programadas em dotação orçamentária própria, prevista no orçamento da União/Estado/Município, para o exercício de {{ano_orcamento}}, na classificação abaixo:
+
+Gestão/Unidade: {{gestao_unidade}}
+Fonte: {{fonte_recursos}}
+Programa de Trabalho: {{programa_trabalho}}
+Elemento de Despesa: {{elemento_despesa}}
+PI: {{plano_interno}}
+Nota de Empenho: {{numero_empenho}}
+
+CLÁUSULA QUINTA – PAGAMENTO
+5.1. O prazo para pagamento e demais condições a ele referentes encontram-se no Termo de Referência.
+
+5.2. O pagamento será efetuado pela Contratante no prazo de {{prazo_pagamento}} dias, contados do recebimento da Nota Fiscal/Fatura.
+
+5.3. A emissão da Nota Fiscal/Fatura será precedida do recebimento definitivo do objeto, conforme o Termo de Referência.
+
+5.4. Havendo erro na apresentação da Nota Fiscal/Fatura, ou circunstância que impeça a liquidação da despesa, o pagamento ficará sobrestado até que a Contratada providencie as medidas saneadoras.
+
+CLÁUSULA SEXTA – REAJUSTE
+6.1. Os preços são fixos e irreajustáveis no prazo de um ano contado da data limite para a apresentação das propostas.
+
+6.2. Após o interregno de um ano, e independentemente de pedido da CONTRATADA, os preços iniciais serão reajustados, mediante a aplicação, pela CONTRATANTE, do índice {{indice_reajuste}}, exclusivamente para as obrigações iniciadas e concluídas após a ocorrência da anualidade.
+
+6.3. Nos reajustes subsequentes ao primeiro, o interregno mínimo de um ano será contado a partir dos efeitos financeiros do último reajuste.
+
+6.4. No caso de atraso ou não divulgação do índice de reajustamento, o CONTRATANTE pagará à CONTRATADA a importância calculada pela última variação conhecida, liquidando a diferença correspondente tão logo seja divulgado o índice definitivo.
+
+6.5. Nas aferições finais, o índice utilizado para reajuste será, obrigatoriamente, o definitivo.
+
+CLÁUSULA SÉTIMA – GARANTIA DE EXECUÇÃO
+7.1. Será exigida a prestação de garantia na presente contratação, conforme regras constantes do Termo de Referência.
+
+7.2. A CONTRATADA prestará garantia de execução do contrato, nos moldes do art. 96 da Lei nº 14.133, de 2021, com validade durante a execução do contrato e por {{prazo_garantia_apos_contrato}} após o término da vigência contratual, em valor correspondente a {{percentual_garantia}}% do valor total do contrato.
+
+7.3. A garantia será liberada após o cumprimento integral de todas as obrigações contratuais e quando em dinheiro, será atualizada monetariamente, conforme dispõe o § 4º do art. 96 da Lei nº 14.133/2021.
+
+CLÁUSULA OITAVA – REGIME DE EXECUÇÃO DOS SERVIÇOS / ENTREGA E RECEBIMENTO DO OBJETO
+8.1. O regime de execução dos serviços a serem executados pela CONTRATADA e/ou a forma de fornecimento de materiais, os materiais que serão empregados e a fiscalização pela CONTRATANTE são aqueles previstos no Termo de Referência, anexo do Edital.
+
+8.2. O prazo de entrega dos bens/execução dos serviços é de {{prazo_entrega}}, contados {{contagem_prazo_entrega}}, no seguinte endereço: {{endereco_entrega}}.
+
+8.3. Os bens/serviços serão recebidos provisoriamente no prazo de {{prazo_recebimento_provisorio}} dias, pelo(a) responsável pelo acompanhamento e fiscalização do contrato, para efeito de posterior verificação de sua conformidade com as especificações constantes no Termo de Referência e na proposta.
+
+8.4. Os bens/serviços poderão ser rejeitados, no todo ou em parte, quando em desacordo com as especificações constantes no Termo de Referência e na proposta, devendo ser substituídos/refeitos no prazo de {{prazo_substituicao}} dias, a contar da notificação da contratada, às suas custas, sem prejuízo da aplicação das penalidades.
+
+8.5. Os bens/serviços serão recebidos definitivamente no prazo de {{prazo_recebimento_definitivo}} dias, contados do recebimento provisório, após a verificação da qualidade e quantidade do material e consequente aceitação mediante termo circunstanciado.
+
+CLÁUSULA NONA – FISCALIZAÇÃO
+9.1. A fiscalização da execução do objeto será efetuada por Comissão/Representante designado pela CONTRATANTE, na forma estabelecida no Termo de Referência, anexo do Edital.
+
+9.2. O acompanhamento e a fiscalização da execução do contrato consistem na verificação da conformidade da prestação dos serviços, dos materiais, técnicas e equipamentos empregados, de forma a assegurar o perfeito cumprimento do ajuste, que serão exercidos por um ou mais representantes da Contratante, especialmente designados, na forma dos arts. 117 e 140 da Lei nº 14.133/2021.
+
+CLÁUSULA DÉCIMA – OBRIGAÇÕES DA CONTRATANTE E DA CONTRATADA
+10.1. As obrigações da CONTRATANTE e da CONTRATADA são aquelas previstas no Termo de Referência, anexo do Edital.
+
+10.2. São obrigações da Contratante:
+{{obrigacoes_contratante}}
+
+10.3. São obrigações da Contratada:
+{{obrigacoes_contratada}}
+
+CLÁUSULA DÉCIMA PRIMEIRA – SANÇÕES ADMINISTRATIVAS
+11.1. As sanções referentes à execução do contrato são aquelas previstas no Termo de Referência, anexo do Edital.
+
+11.2. Comete infração administrativa nos termos do art. 155 da Lei nº 14.133, de 2021, a CONTRATADA que:
+{{infracoes_administrativas}}
+
+11.3. Pela inexecução total ou parcial do objeto deste contrato, a Administração pode aplicar à CONTRATADA as seguintes sanções:
+{{sancoes_aplicaveis}}
+
+11.4. Se a multa aplicada e as indenizações cabíveis forem superiores ao valor de pagamento eventualmente devido pela Administração ao contratado, além da perda desse valor, a diferença será descontada da garantia prestada ou será cobrada judicialmente.
+
+CLÁUSULA DÉCIMA SEGUNDA – RESCISÃO
+12.1. O presente Termo de Contrato poderá ser rescindido:
+12.1.1. por ato unilateral e escrito da Administração, nas situações previstas nos incisos I a IX do art. 137 da Lei nº 14.133, de 2021, e com as consequências indicadas no art. 139 da mesma Lei, sem prejuízo da aplicação das sanções previstas no Termo de Referência, anexo ao Edital;
+12.1.2. amigavelmente, nos termos do art. 138, inciso II, da Lei nº 14.133, de 2021.
+
+12.2. Os casos de rescisão contratual serão formalmente motivados, assegurando-se à CONTRATADA o direito à prévia e ampla defesa.
+
+12.3. A CONTRATADA reconhece os direitos da CONTRATANTE em caso de rescisão administrativa prevista no art. 137 da Lei nº 14.133, de 2021.
+
+12.4. O termo de rescisão será precedido de Relatório indicativo dos seguintes aspectos, conforme o caso:
+12.4.1. Balanço dos eventos contratuais já cumpridos ou parcialmente cumpridos;
+12.4.2. Relação dos pagamentos já efetuados e ainda devidos;
+12.4.3. Indenizações e multas.
+
+CLÁUSULA DÉCIMA TERCEIRA – VEDAÇÕES E PERMISSÕES
+13.1. É vedado à CONTRATADA interromper a execução dos serviços/entrega sob alegação de inadimplemento por parte da CONTRATANTE, salvo nos casos previstos em lei.
+
+13.2. É permitido à CONTRATADA caucionar ou utilizar este Termo de Contrato para qualquer operação financeira, nos termos e de acordo com os procedimentos previstos na Lei nº 14.133/2021.
+13.2.1. A cessão de crédito, a ser feita mediante celebração de termo aditivo, dependerá de comprovação da regularidade fiscal e trabalhista da cessionária, bem como da certificação de que a cessionária não se encontra impedida de licitar e contratar com o Poder Público, conforme a legislação em vigor.
+13.2.2. A crédito a ser pago à cessionária é exatamente aquele que seria destinado à cedente (contratada) pela execução do objeto contratual, com o desconto de eventuais multas, glosas e prejuízos causados à Administração, sem prejuízo para a CONTRATANTE.
+
+CLÁUSULA DÉCIMA QUARTA – ALTERAÇÕES
+14.1. Eventuais alterações contratuais reger-se-ão pela disciplina do art. 124 da Lei nº 14.133/2021.
+
+14.2. A CONTRATADA é obrigada a aceitar, nas mesmas condições contratuais, os acréscimos ou supressões que se fizerem necessários, até o limite de 25% (vinte e cinco por cento) do valor inicial atualizado do contrato.
+
+14.3. As supressões resultantes de acordo celebrado entre as partes contratantes poderão exceder o limite de 25% (vinte e cinco por cento) do valor inicial atualizado do contrato.
+
+CLÁUSULA DÉCIMA QUINTA – DOS CASOS OMISSOS
+15.1. Os casos omissos serão decididos pela CONTRATANTE, segundo as disposições contidas na Lei nº 14.133, de 2021, e demais normas federais de licitações e contratos administrativos e, subsidiariamente, segundo as disposições contidas na Lei nº 8.078, de 1990 – Código de Defesa do Consumidor – e normas e princípios gerais dos contratos.
+
+CLÁUSULA DÉCIMA SEXTA – MATRIZ DE RISCOS
+16.1. Na hipótese de ocorrência de um dos eventos listados na Matriz de Riscos deste contrato, a CONTRATADA deverá, no prazo de {{prazo_comunicacao_risco}} dias úteis, informar à CONTRATANTE sobre o ocorrido, contendo as seguintes informações mínimas:
+a) Detalhamento do evento ocorrido, incluindo sua natureza, a data da ocorrência e sua duração estimada;
+b) As medidas que estavam em vigor para mitigar o risco de materialização do evento, quando houver;
+c) As medidas que irá tomar para fazer cessar os efeitos do evento e o prazo estimado para que esses efeitos cessem;
+d) As obrigações contratuais que não foram cumpridas ou que não irão ser cumpridas em razão do evento; e,
+e) Outras informações relevantes.
+
+16.2. Após a notificação, a CONTRATANTE decidirá quanto ao ocorrido ou poderá solicitar esclarecimentos adicionais à CONTRATADA. Em sua decisão, a CONTRATANTE poderá isentar temporariamente a CONTRATADA do cumprimento das obrigações contratuais afetadas pelo Evento.
+
+16.3. A concessão de isenção não exclui a possibilidade de aplicação das sanções previstas na Cláusula Décima Primeira.
+
+16.4. O reconhecimento pela CONTRATANTE dos eventos descritos na Matriz de Riscos deste Contrato que afetem o cumprimento das obrigações contratuais, com responsabilidade indicada exclusivamente à CONTRATADA, não dará ensejo a recomposição do equilíbrio econômico financeiro do Contrato, devendo o risco ser suportado exclusivamente pela CONTRATADA.
+
+CLÁUSULA DÉCIMA SÉTIMA – FORO
+17.1. É eleito o Foro da {{foro_eleito}} para dirimir os litígios que decorrerem da execução deste Termo de Contrato que não possam ser compostos pela conciliação, conforme art. 92, §1º da Lei nº 14.133/2021.
+
+Para firmeza e validade do pactuado, o presente Termo de Contrato foi lavrado em duas (duas) vias de igual teor, que, depois de lido e achado em ordem, vai assinado pelos contraentes.
+
+{{municipio}}, {{data_assinatura}}
+
+___________________________
+{{nome_representante_contratante}}
+{{cargo_representante_contratante}}
+CONTRATANTE
+
+___________________________
+{{nome_representante_contratada}}
+Representante legal da CONTRATADA
+
+TESTEMUNHAS:
+
+1 - ___________________________
+Nome: {{nome_testemunha1}}
+CPF: {{cpf_testemunha1}}
+
+2 - ___________________________
+Nome: {{nome_testemunha2}}
+CPF: {{cpf_testemunha2}} 

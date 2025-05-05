@@ -1,0 +1,107 @@
+[TIMBRE]
+{{instituicao}}
+CNPJ: {{cnpj}}
+Endereço: {{endereco}}
+{{municipio}} - {{uf}}
+
+DOCUMENTO DE FORMALIZAÇÃO DE DEMANDA Nº {{numero_dfd}}/{{ano}}
+(Em conformidade com a Lei 14.133/2021)
+
+Processo Administrativo nº: {{numero_processo}}
+
+[1. IDENTIFICAÇÃO DA UNIDADE REQUISITANTE]
+Unidade requisitante: {{unidade_requisitante}}
+Responsável pela demanda: {{nome_responsavel}}
+Cargo/Função: {{cargo_responsavel}}
+Telefone: {{telefone_responsavel}}
+E-mail: {{email_responsavel}}
+Data de elaboração: {{data_elaboracao}}
+
+[2. OBJETO DA CONTRATAÇÃO]
+2.1. Descrição sucinta do objeto:
+{{descricao_objeto}}
+
+2.2. Categoria do objeto:
+(   ) Serviço     (   ) Compra     (   ) Obras e serviços de engenharia     (   ) Outro: {{outra_categoria}}
+
+2.3. Vinculação ao Plano Anual de Contratações:
+(   ) Sim     (   ) Não
+
+2.4. Número da contratação no PAC: {{numero_pac}}
+
+[3. JUSTIFICATIVA DA NECESSIDADE]
+3.1. Descrição da necessidade a ser atendida:
+{{descricao_necessidade}}
+
+3.2. Motivação da contratação:
+{{motivacao_contratacao}}
+
+3.3. Resultados a serem alcançados:
+{{resultados_alcancados}}
+
+3.4. Conexão entre a contratação e o planejamento do órgão:
+{{conexao_planejamento}}
+
+[4. QUANTIDADE ESTIMADA]
+4.1. Quantidade necessária:
+{{quantidade_necessaria}}
+
+4.2. Metodologia utilizada para estimativa:
+{{metodologia_estimativa}}
+
+[5. PREVISÃO DE DATA PARA FORNECIMENTO DO BEM OU SERVIÇO]
+Data prevista: {{data_prevista}}
+
+Período: {{periodo_execucao}}
+
+[6. INDICAÇÃO DE MEMBROS PARA A EQUIPE DE PLANEJAMENTO]
+Nome: {{membro1_nome}}
+Cargo/Função: {{membro1_cargo}}
+Matrícula: {{membro1_matricula}}
+Área técnica: (   ) Sim     (   ) Não
+
+Nome: {{membro2_nome}}
+Cargo/Função: {{membro2_cargo}}
+Matrícula: {{membro2_matricula}}
+Área técnica: (   ) Sim     (   ) Não
+
+Nome: {{membro3_nome}}
+Cargo/Função: {{membro3_cargo}}
+Matrícula: {{membro3_matricula}}
+Área técnica: (   ) Sim     (   ) Não
+
+[7. CONSIDERAÇÕES GERAIS]
+{{consideracoes_gerais}}
+
+[8. APROVAÇÕES]
+
+a) Responsável pela elaboração
+Local e data: {{municipio}}, {{data_elaboracao}}
+
+___________________________
+{{nome_responsavel}}
+{{cargo_responsavel}}
+Matrícula: {{matricula_responsavel}}
+
+b) Aprovação pela chefia imediata
+(   ) Aprovo a presente demanda     (   ) Não aprovo a presente demanda
+Justificativa (em caso de não aprovação): {{justificativa_nao_aprovacao}}
+
+Local e data: {{municipio}}, {{data_aprovacao_chefia}}
+
+___________________________
+{{nome_chefe_imediato}}
+{{cargo_chefe_imediato}}
+Matrícula: {{matricula_chefe_imediato}}
+
+c) Autorização da autoridade competente
+(   ) Autorizo a continuidade do processo de contratação
+(   ) Não autorizo a continuidade do processo de contratação
+Justificativa (em caso de não autorização): {{justificativa_nao_autorizacao}}
+
+Local e data: {{municipio}}, {{data_autorizacao}}
+
+___________________________
+{{nome_autoridade}}
+{{cargo_autoridade}}
+Matrícula: {{matricula_autoridade}} 
