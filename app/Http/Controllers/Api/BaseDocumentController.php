@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 
+use Orhanerday\OpenAi\OpenAi;
+
 class BaseDocumentController extends Controller
 {
     protected $templatesPath;
@@ -31,35 +33,66 @@ class BaseDocumentController extends Controller
             return Cache::get($cacheKey);
         }
 
-        $apiKey = config('services.openai.key');
+        $open_ai_key = getenv('OPENAI_API_KEY');
+        $open_ai = new OpenAi($open_ai_key);
+        $open_ai->setORG("org-82bPuEP0JKxx9yTNreD9Jclb");
+
+        
         $prompt = $this->buildPrompt($type, $request);
 
         try {
-            $response = Http::withHeaders([
-                'Authorization' => 'Bearer ' . $apiKey,
-            ])
-            ->timeout(60) // Aumenta o timeout para 60 segundos
-            ->retry(3, 1000) // Tenta 3 vezes com delay de 1 segundo
-            ->post('https://api.openai.com/v1/chat/completions', [
-                'model' => env('OPENAI_MODEL', 'gpt-4-turbo'), // Usa GPT-3.5 por padrão
+            $response = $open_ai->chat([
+                'model' => 'gpt-4-turbo',
                 'messages' => [
-                    ['role' => 'system', 'content' => 'Você é um assistente especialista em licitações públicas brasileiras. Gere APENAS JSON válido, sem texto adicional. O JSON deve conter todos os campos solicitados, com descrições completas, detalhadas e específicas. Use como referência modelos técnicos robustos como pregões e TRs municipais. NUNCA retorne campos com respostas genéricas ou rasas. Sempre preencha os valores com o maior nível de completude possível. Se um campo exigir justificativa ou especificação técnica, forneça como se estivesse elaborando um documento oficial.'],
-                    ['role' => 'user', 'content' => $prompt],
+                    [
+                        "role" => "system",
+                        "content" => "Você é um assistente especialista em licitações públicas brasileiras. Gere APENAS JSON válido, sem texto adicional. O JSON deve conter todos os campos solicitados, com descrições completas, detalhadas e específicas. Use como referência modelos técnicos robustos como pregões e TRs municipais. NUNCA retorne campos com respostas genéricas ou rasas. Sempre preencha os valores com o maior nível de completude possível. Se um campo exigir justificativa ou especificação técnica, forneça como se estivesse elaborando um documento oficial."
+                    ],
+                    [
+                        "role" => "user",
+                        "content" => $prompt
+                    ],
                 ],
-                'temperature' => 0.7,
+                'temperature' => 1.0,
+                'max_tokens' => 4000,
+                'frequency_penalty' => 0,
+                'presence_penalty' => 0,
             ]);
 
-            if (!$response->successful()) {
-                Log::error('OpenAI API Error: ' . $response->body());
-                throw new \Exception('Erro ao comunicar com a OpenAI: ' . $response->body());
+            $apiKey = config('services.openai.key');
+
+        
+            //$response = Http::withHeaders([
+            //    'Authorization' => 'Bearer ' . $apiKey,
+            //])
+            //->timeout(60) // Aumenta o timeout para 60 segundos
+            //->retry(3, 1000) // Tenta 3 vezes com delay de 1 segundo
+            //->post('https://api.openai.com/v1/chat/completions', [
+            //    'model' => env('OPENAI_MODEL', 'gpt-4-turbo'), // Usa GPT-3.5 por padrão
+            //    'messages' => [
+            //        ['role' => 'system', 'content' => 'Você é um assistente especialista em licitações públicas brasileiras. Gere APENAS JSON válido, sem texto adicional. O JSON deve conter todos os campos solicitados, com descrições completas, detalhadas e específicas. Use como referência modelos técnicos robustos como pregões e TRs municipais. NUNCA retorne campos com respostas genéricas ou rasas. Sempre preencha os valores com o maior nível de completude possível. Se um campo exigir justificativa ou especificação técnica, forneça como se estivesse elaborando um documento oficial.'],
+            //        ['role' => 'user', 'content' => $prompt],
+            //    ],
+            //    'temperature' => 0.7,
+            //]);
+            if (!$response) {
+                Log::error('OpenAI API Error: resposta vazia ou inválida.');
+                throw new \Exception('Erro ao comunicar com a OpenAI: resposta vazia');
             }
 
-            $content = trim($response->json('choices.0.message.content'));
-            $data = json_decode($content, true);
+            $content = json_decode($response, true); // <- aqui é o JSON como array associativo
 
             if (json_last_error() !== JSON_ERROR_NONE) {
                 Log::error('JSON Parse Error: ' . json_last_error_msg());
                 throw new \Exception('Erro ao interpretar o JSON: ' . json_last_error_msg());
+            }
+
+            $finalContent = $content['choices'][0]['message']['content'] ?? null;
+            $data = json_decode($finalContent, true);
+
+            if (json_last_error() !== JSON_ERROR_NONE) {
+                Log::error('JSON interno malformado: ' . json_last_error_msg());
+                throw new \Exception('Erro ao interpretar o JSON da resposta da IA: ' . json_last_error_msg());
             }
 
             // Salva no cache
