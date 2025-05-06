@@ -29,6 +29,7 @@ class GuidelinesController extends Controller
             $templateProcessor->setValue('name', $request->name);
             $templateProcessor->setValue('municipality', $request->municipality);
             $templateProcessor->setValue('institution', $request->institution);
+            $templateProcessor->setValue('address', $request->address);
             $templateProcessor->setValue('date', date('d/m/Y'));
 
             // Preenche os dados institucionais

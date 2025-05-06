@@ -111,7 +111,7 @@ class RiskMatrixController extends Controller
 
             // Adiciona a seção de assinaturas
             $section->addText('Assinatura:', ['bold' => true]);
-            $section->addText('$__________________________________________ ');
+            $section->addText('__________________________________________ ');
             $section->addText('${nome_autoridade}');
             $section->addText('${cargo_autoridade}');
             $section->addText('${data_aprovacao}');
