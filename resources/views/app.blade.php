@@ -12,9 +12,8 @@
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
     <!-- Scripts -->
-    <link rel="stylesheet" href="{{ asset('build/assets/app-Dy6ZoQ8W.css') }}">
-    <script type="module" src="{{ asset('build/assets/app-Dvth8VWT.js') }}"></script>
-
+    @viteReactRefresh
+    @vite(['resources/js/app.jsx', 'resources/css/app.css'])
     
 </head>
 <body class="font-sans antialiased bg-gray-100">
