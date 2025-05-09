@@ -20,7 +20,7 @@ class GuidelinesController extends Controller
     {
         try {
             // Gera os dados via IA
-            $data = $this->baseDocument->generateAiData('institutional', $request);
+            //$data = $this->baseDocument->generateAiData('institutional', $request);
 
             // Processa o template
             $templateProcessor = new TemplateProcessor(public_path('templates/guidelines_template.docx'));
@@ -32,10 +32,7 @@ class GuidelinesController extends Controller
             $templateProcessor->setValue('address', $request->address);
             $templateProcessor->setValue('date', date('d/m/Y'));
 
-            // Preenche os dados institucionais
-            foreach ($data as $key => $value) {
-                $templateProcessor->setValue($key, $value);
-            }
+            
 
             // Adiciona os dados institucionais e o brasão
             $this->baseDocument->setInstitutionalData($templateProcessor, $request);

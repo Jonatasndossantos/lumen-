@@ -74,8 +74,8 @@ const ObjectDetails = ({ formData, updateFormData, nextStep, prevStep }) => {
                         {...register('objectDescription', { 
                             required: 'A descrição do objeto é obrigatória',
                             minLength: {
-                                value: 20,
-                                message: 'A descrição deve ter pelo menos 20 caracteres'
+                                value: 50,
+                                message: 'A descrição deve ter pelo menos 50 caracteres'
                             }
                         })}
                     ></textarea>

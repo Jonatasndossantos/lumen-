@@ -25,6 +25,8 @@ class BaseDocumentController extends Controller
 
     public function generateAiData(string $type, Request $request): array
     {
+        
+        
         // Gera uma chave única para o cache baseada no tipo e nos dados da requisição
         $cacheKey = $this->generateCacheKey($type, $request);
         
@@ -83,22 +85,33 @@ class BaseDocumentController extends Controller
             
             return $this->returnEmptyFallback($type, $cacheKey);
         }
+        // Se for tipo 'demanda', não valida o JSON
+        log::info("'{$type}'");
+        if ($type != "risco"){
+            $responseArray = json_decode($response, true);
+
+            $content = $responseArray['choices'][0]['message']['content'];
+
+            $data = $this->tryParseJson($content);
+            
+            return $data;
+        }
+        
         
         // 2. TENTA INTERPRETAR O JSON NORMALMENTE
+        
         $rawJson = $this->extractRawJsonFromResponse($response);
         $data = $this->tryParseJson($rawJson);
-
         // 3. SE FALHAR, TENTA RECUPERAR VIA MÉTODO ESPECÍFICO
         if (!is_array($data) || empty($data)) {
             Log::warning("Tentando recuperação forçada do JSON tipo '{$type}'...");
             $data = $this->recoverMalformedJson($type, $rawJson);
         }
-
         // 4. COMPLETA OS CAMPOS QUE FALTAM
         $expectedFields = $this->getExpectedFields($type);
         foreach ($expectedFields as $field) {
             if (!array_key_exists($field, $data)) {
-                if ($type === 'risco' && $field === 'riscos') {
+                if ($type === 'risco' && (!is_array($data['riscos'] ?? null) || !isset($data['riscos'][0]))) {
                     $data['riscos'] = [[
                         'seq' => '–',
                         'evento' => '–',
@@ -110,14 +123,11 @@ class BaseDocumentController extends Controller
                         'acao_contingencia' => '–',
                         'responsavel_contingencia' => '–',
                     ]];
-                } else {
+                }
+                 else {
                     $data[$field] = '–';
                 }
             }
-        }
-
-        if (!empty($data)) {
-            Cache::put($cacheKey, $data, $this->cacheTime);
         }
         return $data;
     }
@@ -126,6 +136,7 @@ class BaseDocumentController extends Controller
 
     protected function extractRawJsonFromResponse($response): string
     {
+        Log::warning("processando: '{$response}'");
         $array = json_decode($response, true);
         if (!isset($array['choices'][0]['message']['content'])) {
             Log::error('Campo "content" ausente na resposta da IA.');
@@ -142,6 +153,7 @@ class BaseDocumentController extends Controller
 
     protected function tryParseJson(string $raw): array
     {
+        Log::info("tryParseJson");
         $parsed = json_decode($raw, true);
         return is_array($parsed) ? $parsed : [];
     }
@@ -149,6 +161,7 @@ class BaseDocumentController extends Controller
 
     protected function recoverMalformedJson(string $raw, string $type): array
     {
+        log::info("esse: '{$raw}'");
         // Remove delimitadores de markdown (```json ou ```)
         $raw = preg_replace('/```(?:json)?/', '', $raw);
 
@@ -160,7 +173,7 @@ class BaseDocumentController extends Controller
 
         // Remove espaços em excesso
         $raw = trim($raw);
-
+        log::info("passa: '{$raw}'");
         // Tentativa direta
         $parsed = json_decode($raw, true);
         if (!is_array($parsed)) {
@@ -349,27 +362,28 @@ class BaseDocumentController extends Controller
 
     protected function buildPrompt(string $type, Request $request): string
     {
-        $municipality = $request->input('municipality');
-        $institution = $request->input('institution');
+        $municipio = $request->input('municipality');
+        $instituicao = $request->input('institution');
         $address = $request->input('address');
-        $objectDescription = $request->input('objectDescription');
+        $descricao = $request->input('des$descricao');
         $date = now()->format('d \d\e F \d\e Y');
+        $valor = $request->input('valor', '00');
 
         switch ($type) {
             case 'institutional':
-                return $this->buildInstitutionalPrompt($municipality, $institution, $address, $objectDescription, $date);
+                return $this->buildInstitutionalPrompt($municipio, $instituicao, $address, $descricao, $date);
             
             case 'etp':
-                return $this->buildETPPrompt($objectDescription, $request->input('valor', '00'));
+                return $this->buildETPPrompt($descricao, $valor, $municipio, $instituicao, $date);
             
             case 'tr':
-                return $this->buildTRPrompt($objectDescription, $request->input('valor', '00'));
+                return $this->buildTRPrompt($descricao, $valor, $municipio, $instituicao, $date);
             
             case 'demanda':
-                return $this->buildDemandaPrompt($objectDescription, $request->input('valor', '00'));
+                return $this->buildDemandaPrompt($descricao, $valor, $municipio, $instituicao, $date);
             
             case 'risco':
-                return $this->buildRiscoPrompt($objectDescription);
+                return $this->buildRiscoPrompt($descricao, $valor, $municipio, $instituicao, $date);
             
             default:
                 throw new \InvalidArgumentException("Tipo de documento inválido: {$type}");
@@ -410,7 +424,7 @@ class BaseDocumentController extends Controller
             PROMPT;
     }
 
-    protected function buildETPPrompt($descricao, $valor): string
+    protected function buildETPPrompt($descricao, $valor, $municipio, $instituicao, $date): string
     {
         return <<<PROMPT
 
@@ -432,7 +446,7 @@ class BaseDocumentController extends Controller
             Gere um JSON para Estudo Técnico Preliminar com:
 
             - Objeto: {$descricao}
-            - Valor: R\$ {$valor}
+            - Valor: R\$ {$valor} 2 cifrões se o valo não fot informado, deve constar que o campo deverá ser preenchido, ou constar “em anexo”
 
             Retorne os dados no formato JSON com os seguintes campos:
             {
@@ -474,7 +488,7 @@ class BaseDocumentController extends Controller
             PROMPT;
     }
 
-    protected function buildTRPrompt($descricao, $valor): string
+    protected function buildTRPrompt($descricao, $valor, $municipio, $instituicao, $date): string
     {
         return <<<PROMPT
             Você é um assistente especializado em contratações públicas conforme a Lei nº 14.133/2021, e sua tarefa é gerar um JSON técnico e completo que represente um Termo de Referência (TR) com base no template institucional da Administração Pública.
@@ -500,7 +514,7 @@ class BaseDocumentController extends Controller
             Gere um JSON para Termo de Referência com:
 
             - Objeto: {$descricao}
-            - Valor: R\$ {$valor}
+            - Valor: R\$ {$valor} 2 cifrões se o valo não fot informado, deve constar que o campo deverá ser preenchido, ou constar “em anexo”
 
             Retorne os dados no formato JSON com os seguintes campos:
             {
@@ -542,14 +556,14 @@ class BaseDocumentController extends Controller
             PROMPT;
     }
 
-    protected function buildDemandaPrompt($descricao, $valor): string
+    protected function buildDemandaPrompt($descricao, $valor, $municipio, $instituicao, $date): string
     {
         return <<<PROMPT
             Você é um assistente especializado em licitações públicas e contratos administrativos, com profundo conhecimento da Lei nº 14.133/2021.
 
             Sua tarefa é gerar um JSON estruturado e técnico que represente um Documento de Formalização de Demanda (DFD) com todos os dados necessários para instruir uma contratação pública.
             Considere que o DFD pode se referir a qualquer tipo de contratação pública — bens, serviços, obras, tecnologia da informação, consultoria, etc. Ajuste os campos de justificativa, escopo e requisitos conforme a natureza do objeto.
-
+            Equipamentos, equipes e serviços ofericidos pelo munipio nao precisam ser especificados.
             ---
 
             Importante:
@@ -573,17 +587,20 @@ class BaseDocumentController extends Controller
             Gere um JSON para Documento de Formalização de Demanda:
 
             - Objeto: {$descricao}
-            - Valor: R\$ {$valor}
+            - Valor: R\$ {$valor} 2 cifrões se o valo não fot informado, deve constar que o campo deverá ser preenchido, ou constar “em anexo”
+            - municipio: {$municipio}
+            - instituição: {$instituicao}
+            - data: {$date}
 
             Retorne os dados no formato JSON com os seguintes campos:
             {
                 "setor": "<setor solicitante>",
-                "departamento": "<departamento>",
-                "responsavel": "<responsável pela demanda>",
+                "departamento": "<(não escreva as palavras, Unidade/Setor/Dept/departamento): quem é responsavel>",
+                "responsavel": "<responsável pela demanda, não deve sugerir nomes inexistentes>",
                 "descricaoObjeto": "<descrição do objeto>",
                 "valor": "<valor estimado>",
                 "origem_fonte": "<origem da fonte>",
-                "unidade_nome": "<nome da unidade>",
+                "unidade_nome": "<nome da unidade ou Prefeitura Municipal de Município XYZ>", 
                 "justificativa": "<justificativa da demanda>",
                 "impacto_meta": "<impacto na meta>",
                 "criterio": "<critério de seleção>",
@@ -593,12 +610,11 @@ class BaseDocumentController extends Controller
                 "riscos_ocupacionais": "<riscos ocupacionais>",
                 "riscos_normas": "<normas de risco>",
                 "riscos_justificativa": "<justificativa dos riscos>",
-                "alternativa_a": "<primeira alternativa>",
-                "alternativa_b": "<segunda alternativa>",
+                "alternativas": "<quantas alternativas forem necessarias>",
                 "alternativa_conclusao": "<conclusão das alternativas>",
                 "inerciarisco": "<risco de inércia>",
                 "inerciaplano": "<plano de inércia>",
-                "prazo_execucao": "<prazo de execução>",
+                "prazo_execucao": "<prazo de execução, considere o objeto, Quase 100 por cento é 12 meses, >",
                 "forma_pagamento": "<forma de pagamento>",
                 "prazo_vigencia": "<prazo de vigência>",
                 "condicoes_pagamento": "<condições de pagamento>",
@@ -606,8 +622,6 @@ class BaseDocumentController extends Controller
                 "acao_sustentavel": "<ação sustentável>",
                 "ia_duplicidade": "<verificação de duplicidade>",
                 "ia_validacao": "<validação>",
-                "transparencia_resumo": "<resumo para transparência>",
-                "transparencia_faq": "<FAQ para transparência>",
                 "transparencia_prazo": "<prazo de transparência>",
                 "assinatura_formato": "<formato de assinatura>"
             }
@@ -619,7 +633,7 @@ class BaseDocumentController extends Controller
             PROMPT;
     }
 
-    protected function buildRiscoPrompt($descricao): string
+    protected function buildRiscoPrompt($descricao, $valor, $municipio, $instituicao, $date): string
     {
         return <<<PROMPT
             Você é um especialista em contratações públicas e gestão de riscos, com base na Lei nº 14.133/2021.
@@ -684,11 +698,22 @@ class BaseDocumentController extends Controller
     public function setInstitutionalData($templateProcessor, Request $request)
     {
         try {
-            $data = $this->generateAiData('institutional', $request);
+            //$data = $this->generateAiData('institutional', $request);
+            $data = json_decode('{
+                "cidade": "Aramina",
+                "cidade_maiusculo": "ARAMINA",
+                "endereco": "R. Dr. Bráulio de Andrade Junqueira, 795 - Centro",
+                "cep": "14550-000",
+                "nome_autoridade": "[nome protected]",
+                "cargo_autoridade": "Prefeito Municipal",
+                "data_extenso": "9 de maio de 2025",
+                "data_aprovacao": "9 de maio de 2025"
+                }
+            ', true);
             
             // Preenche os dados básicos
             $templateProcessor->setValue('cidade', $data['cidade']);
-            $templateProcessor->setValue('cidade_maiusculo', strtoupper($data['cidade']));
+            $templateProcessor->setValue('cidade_maiusculo', strtoupper($data['cidade_maiusculo']));
             $templateProcessor->setValue('endereco', $data['endereco']);
             $templateProcessor->setValue('cep', $data['cep']);
             $templateProcessor->setValue('nome_autoridade', $data['nome_autoridade']);

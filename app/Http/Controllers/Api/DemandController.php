@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
+use Illuminate\Support\Facades\Log;
 use Exception;
 
 class DemandController extends Controller
@@ -26,10 +27,28 @@ class DemandController extends Controller
             $templateProcessor = new TemplateProcessor(public_path('templates/DFD_Diagnostico_Unificado_Template.docx'));
 
             // Preenche os dados no template
-            foreach ($data as $key => $value) {
-                $templateProcessor->setValue($key, $value);
-            }
+            try{
+                foreach ($data as $key => $value) {
+                    $templateProcessor->setValue($key, $value);
+                }
+            } catch (\Throwable $e) {
+                Log::warning("Falha ao preencher template de demanda com dados iniciais. Tentando recuperar. Erro: " . $e->getMessage());
 
+                // Reexecuta tentativa de recuperação diretamente do conteúdo do $data
+                $raw = json_encode($data, JSON_UNESCAPED_UNICODE);
+
+                $data = $this->baseDocument->recoverMalformedJson($raw, 'demanda');
+
+                if (empty($data)) {
+                    $data = $this->baseDocument->recoverDelimitedKeyValue($raw);
+                }
+
+                $data = $this->baseDocument->normalizeTemplateData($data, 'demanda');
+
+                foreach ($data as $key => $value) {
+                    $templateProcessor->setValue($key, $value);
+                }
+            }
             // Adiciona os dados institucionais e o brasão
             $this->baseDocument->setInstitutionalData($templateProcessor, $request);
 

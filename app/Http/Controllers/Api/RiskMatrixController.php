@@ -59,7 +59,79 @@ class RiskMatrixController extends Controller
             $section->addText('');
 
             // Gera os dados via IA
-            $data = $this->baseDocument->generateAiData('risco', $request);
+            //$data = $this->baseDocument->generateAiData('risco', $request);
+            try{
+                $data = json_decode('{
+                    "processo_administrativo": "00234.2025/SSU",
+                    "objeto_matriz": "Contratação de serviços contínuos vinculados à Secretaria de Serviços Urbanos, englobando manutenção de vias, iluminação pública, limpeza urbana e manejo de resíduos sólidos.",
+                    "data_inicio_contratacao": "2025-06-01",
+                    "unidade_responsavel": "Secretaria de Serviços Urbanos",
+                    "fase_analise": "Planejamento da contratação",
+                    "data_aprovacao": "2025-05-05",
+                    "riscos": [
+                        {
+                        "seq": "1",
+                        "evento": "Atraso sistemático na coleta de resíduos sólidos urbanos por parte da contratada.",
+                        "dano": "Acúmulo de lixo nas vias públicas, proliferação de vetores, insalubridade ambiental e descumprimento do Plano Municipal de Gestão Integrada de Resíduos Sólidos (PMGIRS).",
+                        "impacto": "alto",
+                        "probabilidade": "médio",
+                        "acao_preventiva": "Estabelecer cláusulas contratuais claras com cronogramas e rotas obrigatórias; exigir plano operacional detalhado antes da execução; monitoramento diário via GPS e relatórios de campo.",
+                        "responsavel_preventiva": "Coordenação de Limpeza Urbana da Secretaria de Serviços Urbanos",
+                        "acao_contingencia": "Aplicar sanções contratuais previstas na Lei 14.133/2021 e acionar empresa remanescente ou equipe emergencial da administração para garantir a continuidade do serviço.",
+                        "responsavel_contingencia": "Diretoria de Contratos e Fiscalização de Serviços Urbanos"
+                        },
+                        {
+                        "seq": "2",
+                        "evento": "Execução deficiente de manutenção corretiva da iluminação pública.",
+                        "dano": "Comprometimento da segurança pública noturna, aumento de criminalidade e insegurança dos cidadãos em áreas mal iluminadas.",
+                        "impacto": "médio",
+                        "probabilidade": "alto",
+                        "acao_preventiva": "Impor SLA (Service Level Agreement) com prazo máximo de 48h para atendimento a falhas; exigir registro fotográfico antes/depois da manutenção; vincular pagamento à conformidade técnica da execução.",
+                        "responsavel_preventiva": "Setor de Iluminação Pública da Secretaria de Serviços Urbanos",
+                        "acao_contingencia": "Reorientar recursos para equipes internas ou empresa reserva via contrato emergencial; abertura de protocolo via ouvidoria para priorização de áreas críticas.",
+                        "responsavel_contingencia": "Gerência de Serviços Essenciais Urbanos"
+                        },
+                        {
+                        "seq": "3",
+                        "evento": "Descumprimento contratual por abandono total ou parcial dos serviços.",
+                        "dano": "Paralisação de serviços essenciais à população, como varrição de ruas, manutenção de praças e operação de ecopontos.",
+                        "impacto": "alto",
+                        "probabilidade": "baixo",
+                        "acao_preventiva": "Análise de capacidade operacional e financeira da contratada na habilitação; exigência de garantia contratual nos moldes do art. 96 da Lei 14.133/2021; previsão de cláusulas resolutivas.",
+                        "responsavel_preventiva": "Comissão Permanente de Licitação e Setor Jurídico",
+                        "acao_contingencia": "Execução da garantia; aplicação de penalidades contratuais; ativação de plano emergencial de serviços mínimos por equipe interna ou nova contratação por dispensa de licitação.",
+                        "responsavel_contingencia": "Gabinete da Secretaria de Serviços Urbanos"
+                        },
+                        {
+                        "seq": "4",
+                        "evento": "Exposição indevida de dados pessoais dos trabalhadores ou usuários dos serviços contratados.",
+                        "dano": "Violação da Lei Geral de Proteção de Dados (LGPD), com possível responsabilização civil e administrativa do ente público, além de danos à imagem institucional.",
+                        "impacto": "alto",
+                        "probabilidade": "médio",
+                        "acao_preventiva": "Inserir cláusulas específicas de compliance com a LGPD no contrato; exigir nomeação de Encarregado de Dados pela contratada; auditoria periódica sobre tratamento e armazenamento dos dados.",
+                        "responsavel_preventiva": "Núcleo de Proteção de Dados e Controle Interno da Administração",
+                        "acao_contingencia": "Notificação à Autoridade Nacional de Proteção de Dados (ANPD); bloqueio do fluxo de dados até readequação; aplicação de sanções administrativas e contratuais.",
+                        "responsavel_contingencia": "Controladoria Geral do Município em conjunto com a Secretaria de Serviços Urbanos"
+                        },
+                        {
+                        "seq": "5",
+                        "evento": "Acidentes de trabalho durante a execução de serviços de manutenção urbana.",
+                        "dano": "Paralisação da atividade, responsabilização da Administração por omissão na fiscalização, ações trabalhistas e indenizações por danos físicos ou morais.",
+                        "impacto": "médio",
+                        "probabilidade": "médio",
+                        "acao_preventiva": "Exigir PCMSO e PPRA atualizados; realizar fiscalização sistemática do uso de EPIs; treinamento técnico inicial obrigatório conforme NR-35 e NR-06; inclusão de cláusula de responsabilidade exclusiva da contratada.",
+                        "responsavel_preventiva": "Setor de Segurança do Trabalho da Secretaria de Serviços Urbanos",
+                        "acao_contingencia": "Abertura imediata de sindicância e notificação ao Ministério do Trabalho; suspensão cautelar do contrato em caso de negligência grave; substituição da equipe por outra apta.",
+                        "responsavel_contingencia": "Comissão de Fiscalização de Serviços e Segurança Operacional"
+                        }
+                    ]
+                    }
+                ', true);
+            } catch(\Throwable $e){
+                log:info("deu erro no json informado: MR");
+            }
+
+
 
             // Criar e preencher a tabela
             $table = $section->addTable([
