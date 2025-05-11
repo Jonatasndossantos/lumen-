@@ -1,0 +1,10 @@
+[
+    { "nome": "Aramina", "uf": "SP", "endereco": "R. Dr. Bráulio de Andrade Junqueira, 795 - Centro, Aramina - SP, 14550-000" },
+    { "nome": "São Simão", "uf": "SP", "endereco": "Rua Rodolfo Miranda, 167 – São Simão – SP – CEP: 14200-000" },
+    { "nome": "Ituverava", "uf": "SP", "endereco": "Rua João José de Paula, 776 – Ituverava – SP – CEP: 14500-000" },
+    { "nome": "Buritizal", "uf": "SP", "endereco": "Rua São Paulo, 131 – Buritizal – SP – CEP: 14570-000" },
+    { "nome": "Igarapava", "uf": "SP", "endereco": "Rua Dr Gabriel Vilela, 413 – Igarapava – SP – CEP: 14540-000" },
+    { "nome": "Pedregulho", "uf": "SP", "endereco": "Rua Cel André Vilella, 96 – Pedregulho – SP – CEP: 14470-000" },
+    { "nome": "Jeriquara", "uf": "SP", "endereco": "Rua Jonas Alves Costa, 559 – Jeriquara – SP – CEP: 14450-000" }
+  ]
+  

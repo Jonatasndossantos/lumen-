@@ -1,0 +1,203 @@
+[TIMBRE]
+{{instituicao}}
+CNPJ: {{cnpj}}
+Endereço: {{endereco}}
+{{municipio}} - {{uf}}
+
+ESTUDO TÉCNICO PRELIMINAR Nº {{numero_etp}}/{{ano}}
+(Em conformidade com o art. 18 da Lei 14.133/2021)
+
+Processo Administrativo nº: {{numero_processo}}
+
+[1. INFORMAÇÕES BÁSICAS]
+1.1. Unidade requisitante: {{unidade_requisitante}}
+1.2. Responsável pela elaboração: {{nome_responsavel}}
+1.3. Data de elaboração: {{data_elaboracao}}
+1.4. Origem da demanda: {{origem_demanda}}
+1.5. Número do DFD: {{numero_dfd}}
+
+[2. DESCRIÇÃO DA NECESSIDADE]
+2.1. Descrição da necessidade da contratação:
+{{descricao_necessidade}}
+
+2.2. Alinhamento da contratação com o Planejamento Estratégico:
+{{alinhamento_planejamento}}
+
+2.3. Alinhamento da contratação com o Plano Anual de Contratações:
+{{alinhamento_pac}}
+Número da contratação no PAC (se aplicável): {{numero_pac}}
+
+[3. ÁREA REQUISITANTE]
+3.1. Identificação da área requisitante:
+{{identificacao_area_requisitante}}
+
+3.2. Justificativa da requisição:
+{{justificativa_requisicao}}
+
+[4. REQUISITOS DA CONTRATAÇÃO]
+(conforme art. 18, inciso I da Lei 14.133/2021)
+
+4.1. Requisitos técnicos:
+{{requisitos_tecnicos}}
+
+4.2. Requisitos de negócio:
+{{requisitos_negocio}}
+
+4.3. Requisitos legais:
+{{requisitos_legais}}
+
+4.4. Critérios e práticas de sustentabilidade:
+{{criterios_sustentabilidade}}
+
+4.5. Duração inicial do contrato:
+{{duracao_contrato}}
+
+4.6. Necessidade de transição contratual:
+(   ) Sim     (   ) Não
+Detalhamento (se aplicável): {{detalhamento_transicao}}
+
+4.7. Fornecedores que atuam no mercado:
+{{fornecedores_mercado}}
+
+[5. LEVANTAMENTO DE MERCADO]
+(conforme art. 18, inciso II da Lei 14.133/2021)
+
+5.1. Soluções disponíveis no mercado:
+{{solucoes_disponiveis}}
+
+5.2. Contratações similares realizadas por outros órgãos:
+{{contratacoes_similares}}
+
+5.3. Soluções adotadas por organizações de direito privado:
+{{solucoes_privadas}}
+
+[6. DESCRIÇÃO DA SOLUÇÃO COMO UM TODO]
+(conforme art. 18, inciso III da Lei 14.133/2021)
+
+6.1. Descrição da solução escolhida:
+{{descricao_solucao}}
+
+6.2. Justificativa para escolha:
+{{justificativa_solucao}}
+
+6.3. Bens e serviços que compõem a solução:
+{{composicao_solucao}}
+
+[7. ESTIMATIVA DAS QUANTIDADES A SEREM CONTRATADAS]
+(conforme art. 18, inciso IV da Lei 14.133/2021)
+
+7.1. Quantitativo(s) a ser(em) contratado(s):
+{{quantitativos_contratados}}
+
+7.2. Memória de cálculo:
+{{memoria_calculo}}
+
+7.3. Metodologia utilizada:
+{{metodologia_quantitativo}}
+
+[8. ESTIMATIVA DO VALOR DA CONTRATAÇÃO]
+(conforme art. 18, inciso V da Lei 14.133/2021)
+
+8.1. Valor estimado da contratação: R$ {{valor_estimado}}
+
+8.2. Metodologia de estimativa:
+{{metodologia_estimativa}}
+
+8.3. Planilha de composição dos custos:
+{{composicao_custos}}
+
+[9. JUSTIFICATIVA PARA O PARCELAMENTO OU NÃO DA SOLUÇÃO]
+(conforme art. 18, inciso VI da Lei 14.133/2021)
+
+9.1. Decisão quanto ao parcelamento:
+(   ) Parcelamento     (   ) Não parcelamento
+Justificativa: {{justificativa_parcelamento}}
+
+[10. DEMONSTRATIVO DOS RESULTADOS PRETENDIDOS]
+(conforme art. 18, inciso VII da Lei 14.133/2021)
+
+10.1. Benefícios diretos e indiretos esperados:
+{{beneficios_esperados}}
+
+10.2. Economia de recursos:
+{{economia_recursos}}
+
+10.3. Melhoria da qualidade:
+{{melhoria_qualidade}}
+
+[11. PROVIDÊNCIAS PARA ADEQUAÇÃO DO AMBIENTE]
+(conforme art. 18, inciso VIII da Lei 14.133/2021)
+
+11.1. Adequações administrativas necessárias:
+{{adequacoes_administrativas}}
+
+11.2. Adequações físicas necessárias:
+{{adequacoes_fisicas}}
+
+11.3. Adequações tecnológicas necessárias:
+{{adequacoes_tecnologicas}}
+
+11.4. Necessidade de capacitação:
+{{necessidade_capacitacao}}
+
+11.5. Cronograma das adequações:
+{{cronograma_adequacoes}}
+
+[12. CONTRATAÇÕES CORRELATAS E/OU INTERDEPENDENTES]
+(conforme art. 18, inciso IX da Lei 14.133/2021)
+
+12.1. Contratações correlatas:
+{{contratacoes_correlatas}}
+
+12.2. Contratações interdependentes:
+{{contratacoes_interdependentes}}
+
+[13. POSSÍVEIS IMPACTOS AMBIENTAIS]
+(conforme art. 18, inciso X da Lei 14.133/2021)
+
+13.1. Impactos ambientais identificados:
+{{impactos_ambientais}}
+
+13.2. Medidas mitigadoras:
+{{medidas_mitigadoras}}
+
+[14. POSICIONAMENTO CONCLUSIVO]
+(conforme art. 18, inciso XI da Lei 14.133/2021)
+
+14.1. Viabilidade e razoabilidade da contratação:
+{{viabilidade_contratacao}}
+
+14.2. Justificativa:
+{{justificativa_conclusao}}
+
+[15. EQUIPE DE PLANEJAMENTO DA CONTRATAÇÃO]
+
+Local e data: {{municipio}}, {{data_elaboracao}}
+
+___________________________
+{{nome_membro1}}
+{{cargo_membro1}}
+Matrícula: {{matricula_membro1}}
+
+___________________________
+{{nome_membro2}}
+{{cargo_membro2}}
+Matrícula: {{matricula_membro2}}
+
+___________________________
+{{nome_membro3}}
+{{cargo_membro3}}
+Matrícula: {{matricula_membro3}}
+
+[16. APROVAÇÃO DA AUTORIDADE COMPETENTE]
+
+(   ) Aprovo o presente Estudo Técnico Preliminar
+(   ) Não aprovo o presente Estudo Técnico Preliminar
+Justificativa (em caso de não aprovação): {{justificativa_nao_aprovacao}}
+
+Local e data: {{municipio}}, {{data_aprovacao}}
+
+___________________________
+{{nome_autoridade}}
+{{cargo_autoridade}}
+Matrícula: {{matricula_autoridade}} 
