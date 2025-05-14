@@ -20,14 +20,15 @@ class DemandController extends Controller
     public function generate(Request $request)
     {
         try {
-            // Gera os dados via IA
-            $data = $this->baseDocument->generateAiData('demanda', $request);
+            
 
             // Processa o template
             $templateProcessor = new TemplateProcessor(public_path('templates/DFD_Diagnostico_Unificado_Template.docx'));
 
             // Preenche os dados no template
             try{
+                // Gera os dados via IA
+                $data = $this->baseDocument->generateAiData('demand', $request);
                 foreach ($data as $key => $value) {
                     $templateProcessor->setValue($key, $value);
                 }
@@ -37,13 +38,13 @@ class DemandController extends Controller
                 // Reexecuta tentativa de recuperação diretamente do conteúdo do $data
                 $raw = json_encode($data, JSON_UNESCAPED_UNICODE);
 
-                $data = $this->baseDocument->recoverMalformedJson($raw, 'demanda');
+                $data = $this->baseDocument->recoverMalformedJson($raw, 'demand');
 
                 if (empty($data)) {
                     $data = $this->baseDocument->recoverDelimitedKeyValue($raw);
                 }
 
-                $data = $this->baseDocument->normalizeTemplateData($data, 'demanda');
+                $data = $this->baseDocument->normalizeTemplateData($data, 'demand');
 
                 foreach ($data as $key => $value) {
                     $templateProcessor->setValue($key, $value);

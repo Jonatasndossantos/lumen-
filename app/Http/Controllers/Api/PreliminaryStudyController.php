@@ -21,59 +21,34 @@ class PreliminaryStudyController extends Controller
     {
         try {
             // Gera os dados via IA
-            $data = $this->baseDocument->generateAiData('etp', $request);
-
+            
+            
             // Processa o template
             $templateProcessor = new TemplateProcessor(public_path('templates/ETP_Estudo_Tecnico_Preliminar_Template.docx'));
-
+            
             // Preenche os dados no template
-            try {
-                // Garante que campos críticos existam
-                if (!isset($data['etp_estimativa_quantidades']) || empty($data['etp_estimativa_quantidades'])) {
-                    Log::warning("Campo etp_estimativa_quantidades ausente ou vazio");
-                    $data['etp_estimativa_quantidades'] = 'Não especificado';
-                }
+            try {                
+                $data = $this->baseDocument->generateAiData('preliminaryStudy', $request);
                 
-                if (!isset($data['etp_viabilidade_contratacao']) || empty($data['etp_viabilidade_contratacao'])) {
-                    Log::warning("Campo etp_viabilidade_contratacao ausente ou vazio");
-                    $data['etp_viabilidade_contratacao'] = 'Não especificado';
-                }
-
                 foreach ($data as $key => $value) {
-                    // Garante que os campos críticos sejam substituídos corretamente
-                    if ($key === 'etp_estimativa_quantidades' || $key === 'etp_viabilidade_contratacao') {
-                        Log::info("Preenchendo campo {$key}", ['length' => strlen($value)]);
-                        $templateProcessor->setValue($key, $value);
-                        // Dupla verificação da substituição
-                        try {
-                            $templateProcessor->setValue($key, $value);
-                        } catch (\Exception $e) {
-                            Log::error("Erro ao substituir {$key}: " . $e->getMessage());
-                        }
-                    } else {
-                        $templateProcessor->setValue($key, $value);
-                    }
+                    
+                    $templateProcessor->setValue($key, $value);
+                    
                 }
             } catch (\Throwable $e) {
                 Log::warning("Falha ao preencher template de ETP com dados iniciais. Tentando recuperar. Erro: " . $e->getMessage());
 
                 // Reexecuta tentativa de recuperação diretamente do conteúdo do $data
                 $raw = json_encode($data, JSON_UNESCAPED_UNICODE);
-                $data = $this->baseDocument->recoverMalformedJson($raw, 'etp');
+                $data = $this->baseDocument->recoverMalformedJson($raw, 'preliminaryStudy');
 
                 if (empty($data)) {
                     $data = $this->baseDocument->recoverDelimitedKeyValue($raw);
                 }
 
-                $data = $this->baseDocument->normalizeTemplateData($data, 'etp');
+                $data = $this->baseDocument->normalizeTemplateData($data, 'preliminaryStudy');
 
-                // Garante novamente os campos críticos após recuperação
-                if (!isset($data['etp_estimativa_quantidades'])) {
-                    $data['etp_estimativa_quantidades'] = 'Não especificado';
-                }
-                if (!isset($data['etp_viabilidade_contratacao'])) {
-                    $data['etp_viabilidade_contratacao'] = 'Não especificado';
-                }
+                
 
             foreach ($data as $key => $value) {
                 $templateProcessor->setValue($key, $value);

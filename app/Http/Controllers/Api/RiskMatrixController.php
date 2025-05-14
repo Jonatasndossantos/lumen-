@@ -51,7 +51,7 @@ class RiskMatrixController extends Controller
             $outputPath = public_path('documents/' . $outputFilename);
 
             // Gera os dados via IA
-            $data = $this->baseDocument->generateAiData('risco', $request);
+            $data = $this->baseDocument->generateAiData('riskMatrix', $request);
             
             // Garante que os dados são um array
             if (!is_array($data)) {
