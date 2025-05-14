@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class GuidelinesController extends Controller
 {
@@ -20,7 +21,7 @@ class GuidelinesController extends Controller
     {
         try {
             // Gera os dados via IA
-            //$data = $this->baseDocument->generateAiData('institutional', $request);
+            $data = $this->baseDocument->generateAiData('institutional', $request);
 
             // Processa o template
             $templateProcessor = new TemplateProcessor(public_path('templates/guidelines_template.docx'));
