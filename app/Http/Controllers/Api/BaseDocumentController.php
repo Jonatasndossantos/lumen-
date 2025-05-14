@@ -39,11 +39,13 @@ class BaseDocumentController extends Controller
         $open_ai->setORG("org-82bPuEP0JKxx9yTNreD9Jclb");
 
         $prompt = $this->getPrompt($type, $request);
+
         $jsonSchema = $this->getJsonSchema($type);
         
         Log::debug('Schema enviado:', ['schema' => $jsonSchema]);
         Log::debug('prompt enviado:', ['prompt' => $prompt]);
         Log::debug('system enviado:', ['system' => $this->getSystemRole($type)]);
+
 
         try {
             $response = $open_ai->chat([
@@ -1182,6 +1184,524 @@ class BaseDocumentController extends Controller
         }
 
         return $normalized;
+    }
+
+    protected function getToolSchema(string $type): array
+    {
+        return match ($type) {
+            'institutional' => $this->getInstitutionalSchema(),
+            'etp' => $this->getETPSchema(),
+            'tr' => $this->getTRSchema(),
+            'demanda' => $this->getDFDSchema(),
+            'risco' => $this->getRiscoSchema(),
+            default => $this->getBaseSchema(),
+        };
+    }
+
+    protected function getBaseSchema(): array
+    {
+        return [
+            'type' => 'function',
+            'function' => [
+                'name' => 'generate_document_data',
+                'description' => 'Gera os dados necessários para o documento',
+                'parameters' => [
+                    'type' => 'object',
+                    'properties' => [],
+                    'required' => []
+                ]
+            ]
+        ];
+    }
+
+    protected function getInstitutionalSchema(): array
+    {
+        $schema = $this->getBaseSchema();
+        $fields = $this->getExpectedFields('institutional');
+        
+        foreach ($fields as $field) {
+            $schema['function']['parameters']['properties'][$field] = [
+                'type' => 'string',
+                'description' => 'Campo ' . $field
+            ];
+            $schema['function']['parameters']['required'][] = $field;
+        }
+
+        return $schema;
+    }
+
+    protected function getETPSchema(): array
+    {
+        $schema = $this->getBaseSchema();
+        $schema['function']['description'] = 'Gera os dados necessários para o Estudo Técnico Preliminar (ETP)';
+        
+        $schema['function']['parameters']['properties'] = [
+            'etp_objeto' => [
+                'type' => 'string',
+                'description' => 'Descrição detalhada do objeto da contratação, incluindo especificações técnicas e requisitos'
+            ],
+            'etp_justificativa' => [
+                'type' => 'string',
+                'description' => 'Justificativa fundamentada da contratação conforme Lei nº 14.133/2021'
+            ],
+            'etp_requisitos_funcionais' => [
+                'type' => 'string',
+                'description' => 'Detalhamento dos requisitos funcionais, casos de uso e regras de negócio'
+            ],
+            'etp_requisitos_compatibilidade' => [
+                'type' => 'string',
+                'description' => 'Requisitos de compatibilidade com sistemas existentes e padrões tecnológicos'
+            ],
+            'etp_experiencia_publica' => [
+                'type' => 'string',
+                'description' => 'Análise de experiências similares na administração pública'
+            ],
+            'etp_prazo_execucao' => [
+                'type' => 'string',
+                'description' => 'Definição e justificativa dos prazos de execução'
+            ],
+            'etp_forma_pagamento' => [
+                'type' => 'string',
+                'description' => 'Detalhamento da forma de pagamento e cronograma financeiro'
+            ],
+            'etp_criterios_selecao' => [
+                'type' => 'string',
+                'description' => 'Critérios técnicos para seleção do fornecedor'
+            ],
+            'etp_estimativa_quantidades' => [
+                'type' => 'string',
+                'description' => 'Memória de cálculo das quantidades necessárias'
+            ],
+            'etp_alternativa_a' => [
+                'type' => 'string',
+                'description' => 'Descrição detalhada da primeira alternativa de solução'
+            ],
+            'etp_alternativa_b' => [
+                'type' => 'string',
+                'description' => 'Descrição detalhada da segunda alternativa de solução'
+            ],
+            'etp_alternativa_c' => [
+                'type' => 'string',
+                'description' => 'Descrição detalhada da terceira alternativa de solução'
+            ],
+            'etp_analise_comparativa' => [
+                'type' => 'string',
+                'description' => 'Análise comparativa das alternativas, incluindo custos e benefícios'
+            ],
+            'etp_estimativa_precos' => [
+                'type' => 'string',
+                'description' => 'Estimativa detalhada de preços com base em pesquisa de mercado'
+            ],
+            'etp_solucao_total' => [
+                'type' => 'string',
+                'description' => 'Descrição da solução como um todo, considerando todos os elementos'
+            ],
+            'etp_parcelamento' => [
+                'type' => 'string',
+                'description' => 'Análise sobre o parcelamento ou não da solução'
+            ],
+            'etp_resultados_esperados' => [
+                'type' => 'string',
+                'description' => 'Descrição dos resultados pretendidos com a contratação'
+            ],
+            'etp_providencias_previas' => [
+                'type' => 'string',
+                'description' => 'Providências necessárias para adequação do ambiente'
+            ],
+            'etp_contratacoes_correlatas' => [
+                'type' => 'string',
+                'description' => 'Análise de contratações correlatas e/ou interdependentes'
+            ],
+            'etp_impactos_ambientais' => [
+                'type' => 'string',
+                'description' => 'Análise dos impactos ambientais e medidas de sustentabilidade'
+            ],
+            'etp_viabilidade_contratacao' => [
+                'type' => 'string',
+                'description' => 'Declaração da viabilidade ou não da contratação'
+            ],
+            'etp_previsao_dotacao' => [
+                'type' => 'string',
+                'description' => 'Informações sobre a previsão de dotação orçamentária'
+            ],
+            'etp_previsao_pca' => [
+                'type' => 'string',
+                'description' => 'Detalhamento da previsão no Plano de Contratações Anual (PCA)'
+            ],
+            'etp_conformidade_lgpd' => [
+                'type' => 'string',
+                'description' => 'Análise de conformidade com a LGPD e medidas de proteção de dados'
+            ],
+            'etp_riscos_tecnicos' => [
+                'type' => 'string',
+                'description' => 'Identificação e análise dos riscos técnicos'
+            ],
+            'etp_riscos_mitigacao' => [
+                'type' => 'string',
+                'description' => 'Plano de mitigação dos riscos identificados'
+            ],
+            'etp_beneficios_qualitativos' => [
+                'type' => 'string',
+                'description' => 'Análise dos benefícios qualitativos esperados'
+            ]
+        ];
+        
+        $schema['function']['parameters']['required'] = array_keys($schema['function']['parameters']['properties']);
+        
+        return $schema;
+    }
+
+    protected function getTRSchema(): array
+    {
+        $schema = $this->getBaseSchema();
+        $schema['function']['description'] = 'Gera os dados necessários para o Termo de Referência (TR)';
+        
+        $schema['function']['parameters']['properties'] = [
+            'natureza_objeto' => [
+                'type' => 'string',
+                'description' => 'Natureza do objeto (serviço, obra, compra, etc)'
+            ],
+            'modalidade_contratacao' => [
+                'type' => 'string',
+                'description' => 'Modalidade de contratação conforme Lei nº 14.133/2021'
+            ],
+            'descricao_tecnica' => [
+                'type' => 'string',
+                'description' => 'Descrição técnica detalhada do objeto, incluindo especificações e requisitos'
+            ],
+            'justificativa_demanda' => [
+                'type' => 'string',
+                'description' => 'Justificativa fundamentada da necessidade da contratação'
+            ],
+            'base_legal' => [
+                'type' => 'string',
+                'description' => 'Fundamentação legal específica para a contratação'
+            ],
+            'normas_aplicaveis' => [
+                'type' => 'string',
+                'description' => 'Normas técnicas e regulamentações aplicáveis'
+            ],
+            'cronograma_execucao' => [
+                'type' => 'string',
+                'description' => 'Cronograma detalhado de execução com marcos e entregas'
+            ],
+            'execucao_etapas' => [
+                'type' => 'string',
+                'description' => 'Detalhamento das etapas de execução do objeto'
+            ],
+            'tolerancia_tecnica' => [
+                'type' => 'string',
+                'description' => 'Níveis de tolerância técnica aceitáveis'
+            ],
+            'materiais_sustentaveis' => [
+                'type' => 'string',
+                'description' => 'Especificação de materiais e práticas sustentáveis'
+            ],
+            'execucao_similar' => [
+                'type' => 'string',
+                'description' => 'Análise de execuções similares anteriores'
+            ],
+            'certificacoes' => [
+                'type' => 'string',
+                'description' => 'Certificações e qualificações necessárias'
+            ],
+            'pgr_pcmso' => [
+                'type' => 'string',
+                'description' => 'Requisitos de PGR e PCMSO quando aplicáveis'
+            ],
+            'criterio_julgamento' => [
+                'type' => 'string',
+                'description' => 'Critérios objetivos para julgamento das propostas'
+            ],
+            'garantia_qualidade' => [
+                'type' => 'string',
+                'description' => 'Requisitos de garantia e qualidade'
+            ],
+            'painel_fiscalizacao' => [
+                'type' => 'string',
+                'description' => 'Definição do painel de fiscalização e controle'
+            ],
+            'kpis_operacionais' => [
+                'type' => 'string',
+                'description' => 'Indicadores chave de desempenho operacional'
+            ],
+            'validacao_kpis' => [
+                'type' => 'string',
+                'description' => 'Metodologia de validação e medição dos KPIs'
+            ],
+            'designacao_formal_fiscal' => [
+                'type' => 'string',
+                'description' => 'Critérios para designação formal do fiscal'
+            ],
+            'penalidades' => [
+                'type' => 'string',
+                'description' => 'Definição das penalidades e sanções aplicáveis'
+            ],
+            'alertas_ia' => [
+                'type' => 'string',
+                'description' => 'Alertas e recomendações específicas'
+            ],
+            'anexos_obrigatorios' => [
+                'type' => 'string',
+                'description' => 'Lista de anexos obrigatórios'
+            ],
+            'transparencia_resumo' => [
+                'type' => 'string',
+                'description' => 'Resumo para portal da transparência'
+            ],
+            'faq_juridico' => [
+                'type' => 'string',
+                'description' => 'Perguntas e respostas jurídicas frequentes'
+            ],
+            'prazo_publicacao' => [
+                'type' => 'string',
+                'description' => 'Prazo para publicação do edital'
+            ],
+            'transparencia_contato' => [
+                'type' => 'string',
+                'description' => 'Informações de contato para transparência'
+            ],
+            'assinatura_formato' => [
+                'type' => 'string',
+                'description' => 'Formato e requisitos de assinatura'
+            ]
+        ];
+        
+        $schema['function']['parameters']['required'] = array_keys($schema['function']['parameters']['properties']);
+        
+        return $schema;
+    }
+
+    protected function getDFDSchema(): array
+    {
+        $schema = $this->getBaseSchema();
+        $schema['function']['description'] = 'Gera os dados necessários para o Documento de Formalização da Demanda (DFD)';
+        
+        $schema['function']['parameters']['properties'] = [
+            'setor' => [
+                'type' => 'string',
+                'description' => 'Setor requisitante da contratação'
+            ],
+            'departamento' => [
+                'type' => 'string',
+                'description' => 'Departamento específico do setor requisitante'
+            ],
+            'responsavel' => [
+                'type' => 'string',
+                'description' => 'Responsável pela demanda'
+            ],
+            'descricaoObjeto' => [
+                'type' => 'string',
+                'description' => 'Descrição detalhada do objeto da contratação'
+            ],
+            'valor' => [
+                'type' => 'string',
+                'description' => 'Valor estimado da contratação'
+            ],
+            'origem_fonte' => [
+                'type' => 'string',
+                'description' => 'Origem dos recursos e fonte orçamentária'
+            ],
+            'unidade_nome' => [
+                'type' => 'string',
+                'description' => 'Nome da unidade requisitante'
+            ],
+            'justificativa' => [
+                'type' => 'string',
+                'description' => 'Justificativa detalhada e fundamentada da necessidade da contratação'
+            ],
+            'impacto_meta' => [
+                'type' => 'string',
+                'description' => 'Impacto nas metas institucionais'
+            ],
+            'criterio' => [
+                'type' => 'string',
+                'description' => 'Critérios técnicos específicos'
+            ],
+            'priorizacao_justificativa' => [
+                'type' => 'string',
+                'description' => 'Justificativa para priorização da demanda'
+            ],
+            'escopo' => [
+                'type' => 'string',
+                'description' => 'Escopo detalhado da contratação'
+            ],
+            'requisitos_tecnicos' => [
+                'type' => 'string',
+                'description' => 'Requisitos técnicos específicos'
+            ],
+            'riscos_ocupacionais' => [
+                'type' => 'string',
+                'description' => 'Análise de riscos ocupacionais'
+            ],
+            'riscos_normas' => [
+                'type' => 'string',
+                'description' => 'Conformidade com normas de segurança'
+            ],
+            'riscos_justificativa' => [
+                'type' => 'string',
+                'description' => 'Justificativa da análise de riscos'
+            ],
+            'alternativas' => [
+                'type' => 'string',
+                'description' => 'Análise completa das alternativas consideradas, incluindo descrição das opções, comparação e conclusão'
+            ],
+            'riscos' => [
+                'type' => 'string',
+                'description' => 'Análise detalhada dos riscos envolvidos na contratação e suas mitigações'
+            ],
+            'inerciarisco' => [
+                'type' => 'string',
+                'description' => 'Riscos da não realização da contratação'
+            ],
+            'inerciaplano' => [
+                'type' => 'string',
+                'description' => 'Plano de contingência para não contratação'
+            ],
+            'prazo_execucao' => [
+                'type' => 'string',
+                'description' => 'Prazo de execução previsto'
+            ],
+            'forma_pagamento' => [
+                'type' => 'string',
+                'description' => 'Forma de pagamento proposta'
+            ],
+            'prazo_vigencia' => [
+                'type' => 'string',
+                'description' => 'Prazo de vigência do contrato'
+            ],
+            'condicoes_pagamento' => [
+                'type' => 'string',
+                'description' => 'Condições específicas de pagamento'
+            ],
+            'ods_vinculados' => [
+                'type' => 'string',
+                'description' => 'Objetivos de Desenvolvimento Sustentável vinculados'
+            ],
+            'acao_sustentavel' => [
+                'type' => 'string',
+                'description' => 'Ações de sustentabilidade previstas'
+            ],
+            'ia_duplicidade' => [
+                'type' => 'string',
+                'description' => 'Análise de duplicidade por IA'
+            ],
+            'ia_validacao' => [
+                'type' => 'string',
+                'description' => 'Validação por inteligência artificial'
+            ],
+            'transparencia_resumo' => [
+                'type' => 'string',
+                'description' => 'Resumo para portal da transparência'
+            ],
+            'transparencia_faq' => [
+                'type' => 'string',
+                'description' => 'Perguntas frequentes para transparência'
+            ],
+            'transparencia_prazo' => [
+                'type' => 'string',
+                'description' => 'Prazo para publicação na transparência'
+            ],
+            'assinatura_formato' => [
+                'type' => 'string',
+                'description' => 'Formato de assinatura do documento'
+            ],
+        ];
+        
+        $schema['function']['parameters']['required'] = array_merge(
+            ['justificativa', 'alternativas', 'riscos'],
+            array_keys($schema['function']['parameters']['properties'])
+        );
+        
+        return $schema;
+    }
+
+    protected function getRiscoSchema(): array
+    {
+        $schema = $this->getBaseSchema();
+        $schema['function']['description'] = 'Gera os dados necessários para a Matriz de Risco';
+        
+        $schema['function']['parameters']['properties'] = [
+            'processo_administrativo' => [
+                'type' => 'string',
+                'description' => 'Número do processo administrativo'
+            ],
+            'objeto_matriz' => [
+                'type' => 'string',
+                'description' => 'Descrição do objeto da matriz de risco'
+            ],
+            'data_inicio_contratacao' => [
+                'type' => 'string',
+                'description' => 'Data de início da contratação'
+            ],
+            'unidade_responsavel' => [
+                'type' => 'string',
+                'description' => 'Unidade responsável pela contratação'
+            ],
+            'fase_analise' => [
+                'type' => 'string',
+                'description' => 'Fase atual da análise'
+            ],
+            'data_aprovacao' => [
+                'type' => 'string',
+                'description' => 'Data de aprovação'
+            ],
+            'riscos' => [
+                'type' => 'array',
+                'description' => 'Lista de riscos identificados',
+                'items' => [
+                    'type' => 'object',
+                    'properties' => [
+                        'evento' => [
+                            'type' => 'string',
+                            'description' => 'Descrição do evento de risco'
+                        ],
+                        'dano' => [
+                            'type' => 'string',
+                            'description' => 'Descrição do possível dano'
+                        ],
+                        'impacto' => [
+                            'type' => 'string',
+                            'description' => 'Nível de impacto (baixo, médio, alto)'
+                        ],
+                        'probabilidade' => [
+                            'type' => 'string',
+                            'description' => 'Nível de probabilidade (baixo, médio, alto)'
+                        ],
+                        'acao_preventiva' => [
+                            'type' => 'string',
+                            'description' => 'Ação preventiva para mitigar o risco'
+                        ],
+                        'responsavel_preventiva' => [
+                            'type' => 'string',
+                            'description' => 'Responsável pela ação preventiva'
+                        ],
+                        'acao_contingencia' => [
+                            'type' => 'string',
+                            'description' => 'Ação de contingência caso o risco se materialize'
+                        ],
+                        'responsavel_contingencia' => [
+                            'type' => 'string',
+                            'description' => 'Responsável pela ação de contingência'
+                        ]
+                    ],
+                    'required' => [
+                        'evento',
+                        'dano',
+                        'impacto',
+                        'probabilidade',
+                        'acao_preventiva',
+                        'responsavel_preventiva',
+                        'acao_contingencia',
+                        'responsavel_contingencia'
+                    ]
+                ]
+            ]
+        ];
+        
+        $schema['function']['parameters']['required'] = array_keys($schema['function']['parameters']['properties']);
+        
+        return $schema;
     }
 
 } 

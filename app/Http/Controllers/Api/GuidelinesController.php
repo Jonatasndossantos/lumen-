@@ -33,7 +33,10 @@ class GuidelinesController extends Controller
             $templateProcessor->setValue('address', $request->address);
             $templateProcessor->setValue('date', date('d/m/Y'));
 
-            
+            // Preenche os dados institucionais
+            foreach ($data as $key => $value) {
+                $templateProcessor->setValue($key, $value);
+            }
 
             // Adiciona os dados institucionais e o brasão
             $this->baseDocument->setInstitutionalData($templateProcessor, $request);

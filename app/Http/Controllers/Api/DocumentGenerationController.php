@@ -66,7 +66,7 @@ class DocumentGenerationController extends Controller
 
             // Generate documents sequentially
             $documents = [];
-            
+           
             // 1. Guidelines
             try {
                 $response = $this->guidelinesController->generate($request);
@@ -78,11 +78,12 @@ class DocumentGenerationController extends Controller
             // 2. Demand
             try {
                 $response = $this->demandController->generate($request);
-		        $documents['demand'] = $response->getData()->url;
+		            $documents['demand'] = $response->getData()->url;
+
             } catch (Exception $e) {
                 \Log::error('Error generating demand: ' . $e->getMessage());
             }
-            
+
             // 3. Risk Matrix
             try {
                $response = $this->riskMatrixController->generate($request);
@@ -91,13 +92,13 @@ class DocumentGenerationController extends Controller
                \Log::error('Error generating risk matrix: ' . $e->getMessage());
             }
             
-            //// 4. Preliminary Study
-            //try {
-            //   $response = $this->preliminaryStudyController->generate($request);
-		    //   $documents['preliminaryStudy'] = $response->getData()->url;
-            //} catch (Exception $e) {
-            //   \Log::error('Error generating preliminary study: ' . $e->getMessage());
-            //}
+            // 4. Preliminary Study
+            try {
+               $response = $this->preliminaryStudyController->generate($request);
+		           $documents['preliminaryStudy'] = $response->getData()->url;
+            } catch (Exception $e) {
+               \Log::error('Error generating preliminary study: ' . $e->getMessage());
+            }
             
             // 5. Reference Terms
             try {

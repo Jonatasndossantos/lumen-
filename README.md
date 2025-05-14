@@ -1,3 +1,4 @@
+
 # Sistema de Geração de Documentos Públicos
 
 Sistema desenvolvido para automatizar a geração de documentos públicos utilizando IA, seguindo as diretrizes da Lei nº 14.133/2021 (Nova Lei de Licitações).
@@ -149,6 +150,7 @@ Os endpoints esperam os seguintes parâmetros:
 ## Licença
 
 Este projeto está licenciado sob a licença MIT.
+
 
 
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Support\Facades\Log;
+
 use Exception;
 
 class DemandController extends Controller
@@ -26,6 +27,7 @@ class DemandController extends Controller
             $templateProcessor = new TemplateProcessor(public_path('templates/DFD_Diagnostico_Unificado_Template.docx'));
 
             // Preenche os dados no template
+
             try{
                 // Gera os dados via IA
                 $data = $this->baseDocument->generateAiData('demand', $request);
@@ -40,16 +42,19 @@ class DemandController extends Controller
 
                 $data = $this->baseDocument->recoverMalformedJson($raw, 'demand');
 
+
                 if (empty($data)) {
                     $data = $this->baseDocument->recoverDelimitedKeyValue($raw);
                 }
 
                 $data = $this->baseDocument->normalizeTemplateData($data, 'demand');
 
+
                 foreach ($data as $key => $value) {
                     $templateProcessor->setValue($key, $value);
                 }
             }
+
             // Adiciona os dados institucionais e o brasão
             $this->baseDocument->setInstitutionalData($templateProcessor, $request);
 

@@ -27,6 +27,7 @@ class PreliminaryStudyController extends Controller
             $templateProcessor = new TemplateProcessor(public_path('templates/ETP_Estudo_Tecnico_Preliminar_Template.docx'));
             
             // Preenche os dados no template
+
             try {                
                 $data = $this->baseDocument->generateAiData('preliminaryStudy', $request);
                 
@@ -50,8 +51,8 @@ class PreliminaryStudyController extends Controller
 
                 
 
-            foreach ($data as $key => $value) {
-                $templateProcessor->setValue($key, $value);
+                foreach ($data as $key => $value) {
+                    $templateProcessor->setValue($key, $value);
                 }
             }
 
