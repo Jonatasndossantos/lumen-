@@ -6,10 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Exception;
-<<<<<<< HEAD
-=======
 use Illuminate\Support\Facades\Log;
->>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
 
 class GuidelinesController extends Controller
 {
@@ -36,14 +33,10 @@ class GuidelinesController extends Controller
             $templateProcessor->setValue('address', $request->address);
             $templateProcessor->setValue('date', date('d/m/Y'));
 
-<<<<<<< HEAD
             // Preenche os dados institucionais
             foreach ($data as $key => $value) {
                 $templateProcessor->setValue($key, $value);
             }
-=======
-            
->>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
 
             // Adiciona os dados institucionais e o brasão
             $this->baseDocument->setInstitutionalData($templateProcessor, $request);

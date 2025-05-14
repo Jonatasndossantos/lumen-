@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-=======
+
 # Sistema de Geração de Documentos Públicos
 
 Sistema desenvolvido para automatizar a geração de documentos públicos utilizando IA, seguindo as diretrizes da Lei nº 14.133/2021 (Nova Lei de Licitações).
@@ -155,7 +154,7 @@ Este projeto está licenciado sob a licença MIT.
 
 
 
->>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
