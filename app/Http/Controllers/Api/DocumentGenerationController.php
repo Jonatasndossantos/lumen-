@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\DocumentsGenerated;
 
 class DocumentGenerationController extends Controller
 {
@@ -111,6 +113,15 @@ class DocumentGenerationController extends Controller
             // Check if at least one document was generated
             if (empty($documents)) {
                 throw new Exception('Nenhum documento foi gerado com sucesso.');
+            }
+
+            // Send email with document links
+            try {
+                Mail::to($request->email)
+                    ->send(new DocumentsGenerated($documents, $request->name));
+            } catch (Exception $e) {
+                \Log::error('Error sending email: ' . $e->getMessage());
+                // We don't want to fail the whole request if email fails
             }
             
             return response()->json([

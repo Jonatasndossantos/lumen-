@@ -1,4 +1,3 @@
-
 # Sistema de Geração de Documentos Públicos
 
 Sistema desenvolvido para automatizar a geração de documentos públicos utilizando IA, seguindo as diretrizes da Lei nº 14.133/2021 (Nova Lei de Licitações).
@@ -139,6 +138,58 @@ Os endpoints esperam os seguintes parâmetros:
 - `valor`: Valor estimado (opcional)
 - `date`: Data de referência (opcional)
 
+## Envio de Email
+
+O sistema implementa um mecanismo de backup automático via email para todos os documentos gerados. Quando um documento é gerado com sucesso, o sistema automaticamente envia um email para o endereço fornecido com os links de download.
+
+### Configuração do Email
+
+1. **Configuração do Gmail**
+   - Ative a verificação em duas etapas na sua conta Google
+   - Gere uma senha de aplicativo específica
+   - Configure as variáveis no arquivo `.env`:
+
+   ```env
+   MAIL_MAILER=smtp
+   MAIL_HOST=smtp.gmail.com
+   MAIL_PORT=587
+   MAIL_USERNAME=seu-email@gmail.com
+   MAIL_PASSWORD=sua-senha-de-app
+   MAIL_ENCRYPTION=tls
+   MAIL_FROM_ADDRESS=seu-email@gmail.com
+   MAIL_FROM_NAME="Nome do Seu App"
+   ```
+
+2. **Teste da Configuração**
+   Para testar se a configuração de email está funcionando, use o comando:
+   ```bash
+   php artisan test:email seu-email@exemplo.com
+   ```
+
+### Funcionalidades do Email
+
+- Envio automático após geração bem-sucedida dos documentos
+- Links diretos para download de cada documento gerado
+- Formatação HTML responsiva
+- Tratamento de erros sem interromper o fluxo principal
+- Logs detalhados em caso de falha no envio
+
+### Estrutura do Email
+
+O email enviado contém:
+- Saudação personalizada com o nome do usuário
+- Lista de todos os documentos gerados com sucesso
+- Links diretos para download
+- Aviso sobre expiração dos links
+- Assinatura institucional
+
+### Segurança
+
+- Emails são enviados apenas para endereços validados
+- Links de download são temporários
+- Tratamento seguro de dados sensíveis
+- Logs de tentativas de envio para auditoria
+
 ## Contribuição
 
 1. Fork o projeto
@@ -151,9 +202,60 @@ Os endpoints esperam os seguintes parâmetros:
 
 Este projeto está licenciado sob a licença MIT.
 
+## Monitoramento com Laravel Telescope
 
+O sistema utiliza o Laravel Telescope para monitoramento e debugging em produção. O Telescope é configurado para ser leve e não impactar o desempenho da aplicação.
 
+### Configuração do Telescope
 
+1. **Variáveis de Ambiente**
+   ```env
+   TELESCOPE_ENABLED=true
+   TELESCOPE_DRIVER=database
+   TELESCOPE_PATH=telescope
+   ```
+
+2. **Segurança**
+   - Acesso restrito através do gate `viewTelescope`
+   - Proteção de dados sensíveis
+   - Headers e parâmetros sensíveis ocultos
+
+3. **Watchers Configurados**
+   - Cache
+   - Commands
+   - Events
+   - Exceptions
+   - Jobs
+   - Logs
+   - Mail
+   - Models
+   - Queries
+   - Requests
+   - Schedule
+
+4. **Acesso ao Dashboard**
+   - URL: `http://seu-dominio/telescope`
+   - Acesso restrito a emails autorizados
+   - Configurado em `app/Providers/TelescopeServiceProvider.php`
+
+### Otimizações
+
+- Uso de driver database para melhor performance
+- Filtros configurados para reduzir overhead
+- Cache de dados implementado
+- Processamento assíncrono de logs
+
+### Monitoramento de Recursos
+
+O Telescope monitora:
+- Requisições HTTP
+- Queries de banco de dados
+- Jobs em fila
+- Cache
+- Logs
+- Exceções
+- Eventos
+- Comandos Artisan
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
