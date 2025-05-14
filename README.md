@@ -1,3 +1,161 @@
+<<<<<<< HEAD
+=======
+# Sistema de Geração de Documentos Públicos
+
+Sistema desenvolvido para automatizar a geração de documentos públicos utilizando IA, seguindo as diretrizes da Lei nº 14.133/2021 (Nova Lei de Licitações).
+
+## Estrutura do Sistema
+
+### Controladores
+
+- `BaseDocumentController`: Controlador base que gerencia a comunicação com a IA e processamento de templates
+- `DemandController`: Gera Documento de Formalização de Demanda (DFD)
+- `PreliminaryStudyController`: Gera Estudo Técnico Preliminar (ETP)
+- `ReferenceTermsController`: Gera Termo de Referência (TR)
+- `RiskMatrixController`: Gera Matriz de Risco
+- `GuidelinesController`: Gera Orientações Institucionais
+
+### Templates
+
+Localizados em `public/templates/`:
+- `DFD_Diagnostico_Unificado_Template.docx`
+- `ETP_Estudo_Tecnico_Preliminar_Template.docx`
+- `TR_Termo_Referencia_V11_3_Template.docx`
+- `Matriz_Risco_Template.docx`
+- `guidelines_template.docx`
+
+## Processos de Geração
+
+### 1. Documento de Formalização de Demanda (DFD)
+- Recebe dados básicos da requisição
+- Gera conteúdo via IA
+- Preenche template com dados gerados
+- Adiciona dados institucionais e brasão
+- Salva documento final
+
+### 2. Estudo Técnico Preliminar (ETP)
+- Recebe dados do objeto e valores
+- Gera conteúdo técnico via IA
+- Preenche template com dados gerados
+- Adiciona dados institucionais e brasão
+- Salva documento final
+
+### 3. Termo de Referência (TR)
+- Recebe dados do objeto e valores
+- Gera conteúdo técnico e legal via IA
+- Preenche template com dados gerados
+- Adiciona dados institucionais e brasão
+- Salva documento final
+
+### 4. Matriz de Risco
+- Recebe dados do processo
+- Gera análise de riscos via IA
+- Cria tabela dinâmica com riscos
+- Preenche template com dados gerados
+- Adiciona dados institucionais e brasão
+- Salva documento final
+
+### 5. Orientações Institucionais
+- Recebe dados institucionais
+- Gera conteúdo orientativo via IA
+- Preenche template com dados gerados
+- Adiciona dados institucionais e brasão
+- Salva documento final
+
+## Tratamento de Erros
+
+O sistema implementa um robusto tratamento de erros:
+
+1. **Recuperação de JSON Malformado**
+   - Tenta recuperar dados malformados
+   - Normaliza estrutura do JSON
+   - Preenche campos ausentes com valores padrão
+
+2. **Validação de Templates**
+   - Verifica existência dos templates
+   - Valida permissões de escrita
+   - Cria diretórios necessários
+
+3. **Cache de Dados**
+   - Implementa cache para otimizar performance
+   - Gera chaves únicas baseadas nos dados da requisição
+   - Cache válido por 1 hora
+
+## Integração com IA
+
+O sistema utiliza a API da OpenAI (GPT-4) para gerar conteúdo:
+
+1. **Prompts Especializados**
+   - Cada tipo de documento tem seu prompt específico
+   - Instruções detalhadas para cada contexto
+   - Validação de campos obrigatórios
+
+2. **Estrutura de Dados**
+   - JSON Schema para cada tipo de documento
+   - Campos obrigatórios definidos
+   - Validação de tipos e formatos
+
+3. **Processamento de Respostas**
+   - Tratamento de respostas da IA
+   - Normalização de dados
+   - Preenchimento de campos ausentes
+
+## Requisitos do Sistema
+
+- PHP 8.0+
+- Composer
+- Extensão PHP para processamento de documentos Word
+- Chave de API da OpenAI
+- Permissões de escrita nos diretórios de templates e documentos
+
+## Instalação
+
+1. Clone o repositório
+2. Execute `composer install`
+3. Configure as variáveis de ambiente:
+   - `OPENAI_API_KEY`
+   - `OPENAI_ORG_ID`
+4. Configure as permissões dos diretórios:
+   - `public/templates`
+   - `public/documents`
+   - `public/brasoes`
+
+## Uso
+
+Cada controlador expõe um endpoint para geração de documentos:
+
+```php
+POST /api/demand/generate
+POST /api/preliminary-study/generate
+POST /api/reference-terms/generate
+POST /api/risk-matrix/generate
+POST /api/guidelines/generate
+```
+
+Os endpoints esperam os seguintes parâmetros:
+- `municipality`: Nome do município
+- `institution`: Nome da instituição
+- `address`: Endereço completo
+- `objectDescription`: Descrição do objeto
+- `valor`: Valor estimado (opcional)
+- `date`: Data de referência (opcional)
+
+## Contribuição
+
+1. Fork o projeto
+2. Crie uma branch para sua feature
+3. Commit suas mudanças
+4. Push para a branch
+5. Abra um Pull Request
+
+## Licença
+
+Este projeto está licenciado sob a licença MIT.
+
+
+
+
+>>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\File;
 use Exception;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Log;
+>>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
 
 class DocumentGenerationController extends Controller
 {
@@ -66,6 +70,7 @@ class DocumentGenerationController extends Controller
             // Generate documents sequentially
             $documents = [];
             
+<<<<<<< HEAD
             // 1. Guidelines
             try {
                 $response = $this->guidelinesController->generate($request);
@@ -73,15 +78,29 @@ class DocumentGenerationController extends Controller
             } catch (Exception $e) {
                 \Log::error('Error generating guidelines: ' . $e->getMessage());
             }
+=======
+            //// 1. Guidelines
+            //try {
+            //    $response = $this->guidelinesController->generate($request);
+		    //    $documents['guidelines'] = $response->getData()->url;
+            //} catch (Exception $e) {
+            //    \Log::error('Error generating guidelines: ' . $e->getMessage());
+            //}
+>>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
             
             // 2. Demand
             try {
                 $response = $this->demandController->generate($request);
+<<<<<<< HEAD
 		$documents['demand'] = $response->getData()->url;
+=======
+		        $documents['demand'] = $response->getData()->url;
+>>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
             } catch (Exception $e) {
                 \Log::error('Error generating demand: ' . $e->getMessage());
             }
             
+<<<<<<< HEAD
             // 3. Risk Matrix
             try {
                 $response = $this->riskMatrixController->generate($request);
@@ -105,6 +124,31 @@ class DocumentGenerationController extends Controller
             } catch (Exception $e) {
                 \Log::error('Error generating reference terms: ' . $e->getMessage());
             }
+=======
+           //// 3. Risk Matrix
+           //try {
+           //    $response = $this->riskMatrixController->generate($request);
+		   //    $documents['riskMatrix'] = $response->getData()->url;
+           //} catch (Exception $e) {
+           //    \Log::error('Error generating risk matrix: ' . $e->getMessage());
+           //}
+           //
+           //// 4. Preliminary Study
+           //try {
+           //    $response = $this->preliminaryStudyController->generate($request);
+		   //    $documents['preliminaryStudy'] = $response->getData()->url;
+           //} catch (Exception $e) {
+           //    \Log::error('Error generating preliminary study: ' . $e->getMessage());
+           //}
+           //
+           //// 5. Reference Terms
+           //try {
+           //    $response = $this->referenceTermsController->generate($request);
+		   //    $documents['referenceTerms'] = $response->getData()->url;
+           //} catch (Exception $e) {
+           //    \Log::error('Error generating reference terms: ' . $e->getMessage());
+           //}
+>>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
             
             // Check if at least one document was generated
             if (empty($documents)) {

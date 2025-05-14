@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Exception;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Log;
+>>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
 
 class ReferenceTermsController extends Controller
 {
@@ -26,8 +30,32 @@ class ReferenceTermsController extends Controller
             $templateProcessor = new TemplateProcessor(public_path('templates/TR_Termo_Referencia_V11_3_Template.docx'));
 
             // Preenche os dados no template
+<<<<<<< HEAD
             foreach ($data as $key => $value) {
                 $templateProcessor->setValue($key, $value);
+=======
+            try {
+                foreach ($data as $key => $value) {
+                    $templateProcessor->setValue($key, $value);
+                }
+            } catch (\Throwable $e) {
+                Log::warning("Falha ao preencher template de TR com dados iniciais. Tentando recuperar. Erro: " . $e->getMessage());
+
+                // Reexecuta tentativa de recuperação diretamente do conteúdo do $data
+                $raw = json_encode($data, JSON_UNESCAPED_UNICODE);
+
+                $data = $this->baseDocument->recoverMalformedJson($raw, 'tr');
+
+                if (empty($data)) {
+                    $data = $this->baseDocument->recoverDelimitedKeyValue($raw);
+                }
+
+                $data = $this->baseDocument->normalizeTemplateData($data, 'tr');
+
+                foreach ($data as $key => $value) {
+                    $templateProcessor->setValue($key, $value);
+                }
+>>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
             }
 
             // Adiciona os dados institucionais e o brasão

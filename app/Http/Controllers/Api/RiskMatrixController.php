@@ -8,6 +8,10 @@ use PhpOffice\PhpWord\TemplateProcessor;
 use PhpOffice\PhpWord\IOFactory;
 use PhpOffice\PhpWord\PhpWord;
 use Exception;
+<<<<<<< HEAD
+=======
+use Illuminate\Support\Facades\Log;
+>>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
 
 class RiskMatrixController extends Controller
 {
@@ -49,6 +53,24 @@ class RiskMatrixController extends Controller
             $outputFilename = 'Matriz de risco_' . time() . '.docx';
             $outputPath = public_path('documents/' . $outputFilename);
 
+<<<<<<< HEAD
+=======
+            // Gera os dados via IA
+            $data = $this->baseDocument->generateAiData('risco', $request);
+            
+            // Garante que os dados são um array
+            if (!is_array($data)) {
+                Log::error("Dados inválidos recebidos da IA:", ['type' => gettype($data)]);
+                throw new Exception("Dados inválidos recebidos da IA");
+            }
+
+            // Garante que o campo 'riscos' existe e é um array
+            if (!isset($data['riscos']) || !is_array($data['riscos'])) {
+                Log::error("Campo 'riscos' não encontrado ou inválido:", ['data' => $data]);
+                throw new Exception("Campo 'riscos' não encontrado ou inválido nos dados");
+            }
+
+>>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
             // 1. Carregar o template
             $phpWord = IOFactory::load($templatePath, 'Word2007');
             $sections = $phpWord->getSections();
@@ -58,9 +80,12 @@ class RiskMatrixController extends Controller
             // Adiciona espaço antes da tabela
             $section->addText('');
 
+<<<<<<< HEAD
             // Gera os dados via IA
             $data = $this->baseDocument->generateAiData('risco', $request);
 
+=======
+>>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
             // Criar e preencher a tabela
             $table = $section->addTable([
                 'borderSize' => 6,
@@ -95,14 +120,42 @@ class RiskMatrixController extends Controller
 
             // Adicionar linhas com os dados
             foreach ($data['riscos'] as $index => $risco) {
+<<<<<<< HEAD
                 $table->addRow();
                 $risco['seq'] = $index + 1;
                 foreach ($risco as $campo) {
+=======
+                if (!is_array($risco)) {
+                    Log::warning("Risco inválido encontrado no índice {$index}");
+                    continue;
+                }
+
+                $table->addRow();
+                
+                // Campos esperados na ordem correta
+                $campos = [
+                    'seq' => (string)($index + 1),
+                    'evento' => $risco['evento'] ?? '',
+                    'dano' => $risco['dano'] ?? '',
+                    'impacto' => $risco['impacto'] ?? '',
+                    'probabilidade' => $risco['probabilidade'] ?? '',
+                    'acao_preventiva' => $risco['acao_preventiva'] ?? '',
+                    'responsavel_preventiva' => $risco['responsavel_preventiva'] ?? '',
+                    'acao_contingencia' => $risco['acao_contingencia'] ?? '',
+                    'responsavel_contingencia' => $risco['responsavel_contingencia'] ?? ''
+                ];
+
+                foreach ($campos as $nome => $valor) {
+>>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
                     $cell = $table->addCell(1500, [
                         'borderSize' => 6,
                         'borderColor' => '000000'
                     ]);
+<<<<<<< HEAD
                     $cell->addText($campo, $textStyle);
+=======
+                    $cell->addText($valor, $textStyle);
+>>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
                 }
             }
 
@@ -129,7 +182,11 @@ class RiskMatrixController extends Controller
             
             // Preenche os dados do processo
             foreach ($data as $key => $value) {
+<<<<<<< HEAD
                 if ($key !== 'riscos') {
+=======
+                if ($key !== 'riscos' && !is_array($value)) {
+>>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
                     $templateProcessor->setValue($key, $value);
                 }
             }
@@ -154,8 +211,12 @@ class RiskMatrixController extends Controller
                 'url' => url("documents/{$outputFilename}")
             ]);
         } catch (Exception $e) {
+<<<<<<< HEAD
             // Log the error
             error_log("Error in RiskMatrixController: " . $e->getMessage());
+=======
+            Log::error("Erro ao gerar matriz de risco: " . $e->getMessage());
+>>>>>>> 42982285fb2f3768eade067e3517a013b5e7ddaf
             return response()->json([
                 'success' => false,
                 'error' => "Error generating risk matrix document: " . $e->getMessage()
